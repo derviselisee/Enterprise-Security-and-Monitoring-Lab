@@ -48,31 +48,54 @@ Threat Simulation and Detection
 Skills Demonstrated
 
 • Windows Server administration, Active Directory structure design, user and device management, DNS and DHCP setup.
+
 • FortiGate deployment with SD WAN configuration, high availability setup, and identity based firewall rules using LDAP and FSSO.
+
 • Linux system deployment across Ubuntu and Debian, including service installation and authentication integration.
+
 • SIEM log collection, alerting, and event correlation through Wazuh for Windows, Linux, and firewall activity.
+
 • SNMP based monitoring and alerting using Zabbix for system performance and network visibility.
+
 • IT asset inventory and ticket management using GLPI to replicate enterprise IT workflows.
+
 • Cross platform identity management with LDAP and user mapping through FSSO for security visibility.
+
 • Traffic inspection, log analysis, and session monitoring through FortiView and system logs.
+
+
 • Simulated attack generation with Kali Linux and detection across SIEM, monitoring dashboards, and firewall logs.
+
 • Enterprise level troubleshooting across networking, firewall, Windows, and Linux environments.
 
 Tools and Technologies Used
 
 • Windows Server 2019
+
 • Windows 10
+
 • Ubuntu Desktop
+
 • Debian Server
+
 • FortiGate Firewall, SD WAN, High Availability
+
 • Wazuh SIEM
+
 • Zabbix Monitoring
+
 • GLPI IT asset and ticket management
+
 • LDAP
+
 • FSSO
+
 • Kali Linux
+
 • VMware Workstation
+
 • Syslog and SNMP
+
 • FortiView and log analysis tools
 
 Purpose of the Project
