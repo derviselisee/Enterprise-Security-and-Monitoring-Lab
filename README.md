@@ -14,26 +14,35 @@ Implementation Summary
 Core Infrastructure
 
 • Deployed a Windows Server as the Active Directory domain controller providing DNS, DHCP, and user management.
+
 • Joined a Windows 10 workstation to the domain and added an Ubuntu desktop to represent a Linux client.
+
 • Created an LDAP environment for Linux authentication and enabled FSSO to map domain users to firewall policies.
 
 FortiGate Security, SD WAN, and HA
 
 • Deployed two FortiGate firewalls in VMware to build a high availability cluster.
+
 • Configured SD WAN by assigning Port1 as a bridged WAN link and Port2 as a NAT based WAN link, allowing the firewall to test path quality and select the best route.
+
 • Integrated the FortiGate cluster with Active Directory using LDAP and FSSO to apply identity based firewall policies and monitor user activity.
+
 • Created internal segmentation and enforced controlled access between systems, monitoring all sessions through FortiView and firewall logs.
 
 Security Monitoring and IT Management
 
 • Installed a Debian based Wazuh server to collect logs from Windows, Linux, and FortiGate systems.
+
 • Deployed Zabbix on Ubuntu Server for SNMP based monitoring of devices and system performance.
+
 • Installed GLPI for asset inventory, ticket management, and IT documentation, creating a realistic IT operations workflow.
 
 Threat Simulation and Detection
 
 • Used Kali Linux to perform controlled attacks such as network scanning, credential attempts, and enumeration.
+
 • Verified detection and alert generation through Wazuh, Windows logs, FortiGate security events, and Zabbix monitoring dashboards.
+
 • Validated user mapping, event correlation, and incident triage across the environment.
 
 Skills Demonstrated
