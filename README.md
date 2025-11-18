@@ -152,3 +152,11 @@ I assigned port 2 to the NAT network in VMware. This gives the firewall a second
 
 Both connections act like two separate internet service providers, which lets me test SD WAN performance, failover, health checks, and traffic steering.
 
+2-FortiGate Interface Configuration and WAN Setup
+
+In this part of the lab I focused on configuring the network interfaces of my FortiGate firewall. 
+My goal was to recreate a realistic enterprise layout with two independent WAN connections for SD WAN testing and three internal LAN networks that act as separate zones.
+I also reviewed the system event logs to confirm that all changes were applied correctly.
+<img width="1919" height="923" alt="WAN 2 int configs" src="https://github.com/user-attachments/assets/94cd89d4-c7bc-45dc-8ca9-f87fb7feb785" />
+<img width="1912" height="921" alt="WAN 1 int config" src="https://github.com/user-attachments/assets/208327c5-c46a-42d1-b004-f728c19c5335" />
+
