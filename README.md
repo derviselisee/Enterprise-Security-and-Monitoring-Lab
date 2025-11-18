@@ -113,7 +113,7 @@ Threat Simulation and Detection
 
 • Enterprise level troubleshooting across networking, firewall, Windows, and Linux environments.
 
-TOOLS AND TECHNOLOGIES USED
+## TOOLS AND TECHNOLOGIES USED
 
 • Windows Server 2019
 
@@ -162,7 +162,7 @@ and applied identity based policies while monitoring traffic and sessions throug
 • Installed and managed Wazuh SIEM on Debian for centralized log collection and alerting, deployed Zabbix and GLPI on Ubuntu Server
 for SNMP monitoring and IT asset management, and used Kali Linux to generate simulated attacks that were detected across SIEM and monitoring platforms.
 
-1-FortiGate Virtual Machine Network Setup****
+## 1-FortiGate Virtual Machine Network Setup****
 <img width="996" height="848" alt="MY-FORTIGATE interfaces" src="https://github.com/user-attachments/assets/78eff0c5-f420-40ef-85d6-c2aa80a4d4ad" />
 
 I configured my FortiGate virtual machine inside VMware Workstation and assigned multiple network adapters in order to build a complete enterprise environment with three internal LANs and two external links for SD WAN testing.
@@ -197,7 +197,7 @@ I assigned port 2 to the NAT network in VMware. This gives the firewall a second
 
 Both connections act like two separate internet service providers, which lets me test SD WAN performance, failover, health checks, and traffic steering.
 
-2-FortiGate Interface Configuration and WAN Setup
+## 2-FortiGate Interface Configuration and WAN Setup
 
 In this part of the lab I focused on configuring the network interfaces of my FortiGate firewall. 
 My goal was to recreate a realistic enterprise layout with two independent WAN connections for SD WAN testing and three internal LAN networks that act as separate zones.
@@ -253,7 +253,7 @@ The logs show interface edits, DHCP server creation, global setting changes, and
 This helped me verify that every configuration step was correctly applied and recognized by the firewall.
 <img width="1907" height="921" alt="Systems Events (Logs)" src="https://github.com/user-attachments/assets/c671aba9-a112-4b09-874c-f4564a14e691" />
 
-3-SD WAN Configuration and Performance Monitoring
+## 3-SD WAN Configuration and Performance Monitoring
 
 After finishing the interface configuration for my WAN and LAN networks, I moved on to building the SD WAN setup. 
 My goal was to combine my two internet connections into a single virtual link and apply performance monitoring so the firewall could make intelligent routing decisions.
@@ -309,7 +309,7 @@ By doing this, the firewall will automatically route traffic through the WAN lin
 <img width="1469" height="666" alt="Static Route config" src="https://github.com/user-attachments/assets/936dc79f-e4b7-431c-9342-e405cc0fdc25" />
 <img width="1858" height="442" alt="Static Route (sdwan link)" src="https://github.com/user-attachments/assets/85e98f9f-540a-4a03-bba5-06093b6e0194" />
 
-4-Firewall Policy Configuration
+## 4-Firewall Policy Configuration
 
 Once the SD WAN link was fully configured and the default route was in place, I created the firewall policies that allow my internal networks to reach the internet.
 Each LAN segment needed its own policy because I built three separate networks for employees, SOC and monitoring systems, and administrative devices. I wanted clear traffic control for each zone while still pointing all outbound traffic toward the SD WAN virtual interface.
@@ -335,7 +335,7 @@ Result
 With these policies in place, all LAN networks can reach the internet through the SD WAN link. This creates a complete flow from interface configuration, SD WAN setup, DNS, static routing, and finally the firewall rules that allow the network to function.
 <img width="1919" height="460" alt="Policies" src="https://github.com/user-attachments/assets/c46707ac-8c30-4947-ac04-e4bfc2847595" />
 
-5-Testing Connectivity with the Windows Server
+## 5-Testing Connectivity with the Windows Server
 
 After finishing the routing and firewall policy configuration, I deployed a Windows Server 2022 virtual machine to test whether the environment was functioning correctly. 
 I connected the server to the correct LAN segment in VMware so it would join the network through the Employees or SOC interface on the FortiGate, depending on the segment I selected.
@@ -359,7 +359,7 @@ the destination, and the policy that allowed the traffic. This confirmed that th
 
 This test validated the entire setup. The LAN configuration, DHCP services, DNS settings, SD WAN routing, firewall rules, and monitoring tools all worked together exactly as intended.
 
-6-Deploying Windows Server for Active Directory, LDAP, and FSSO
+## 6-Deploying Windows Server for Active Directory, LDAP, and FSSO
 
 A-I deployed a Windows Server virtual machine because it plays a central role in any enterprise network.
 Windows Server acts as the backbone of identity, authentication, and centralized management in a company. It provides services that allow employees to log in securely, access shared resources, and follow company wide policies.
