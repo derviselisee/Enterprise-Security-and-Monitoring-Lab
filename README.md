@@ -288,6 +288,35 @@ I did not apply any security profiles yet because the focus at this stage was ba
 Result
 
 With these policies in place, all LAN networks can reach the internet through the SD WAN link. This creates a complete flow from interface configuration, SD WAN setup, DNS, static routing, and finally the firewall rules that allow the network to function.
+<img width="1919" height="460" alt="Policies" src="https://github.com/user-attachments/assets/c46707ac-8c30-4947-ac04-e4bfc2847595" />
+
+5-Testing Connectivity with the Windows Server
+
+After finishing the routing and firewall policy configuration, I deployed a Windows Server 2022 virtual machine to test whether the environment was functioning correctly. 
+I connected the server to the correct LAN segment in VMware so it would join the network through the Employees or SOC interface on the FortiGate, depending on the segment I selected.
+<img width="1570" height="903" alt="Win-server interfaces 2" src="https://github.com/user-attachments/assets/b53ea09d-8598-4d4c-9ef2-f36b4d306586" />
+
+When the system started, it automatically received its network configuration through DHCP. The server successfully obtained an IP address, its subnet mask, the default gateway, 
+and the DNS server from the FortiGate. This confirmed that the internal DHCP service was working properly.
+I then opened a command prompt and tested basic connectivity by pinging two important destinations. First, I pinged 8.8.8.8 to confirm that the server could reach the internet through the SD WAN link.
+The replies came back with normal latency, which showed that outbound traffic was working. I also pinged the default gateway to verify internal communication between the server and the FortiGate.
+Both tests succeeded without any packet loss.
+<img width="1716" height="958" alt="Win-server got an address via dhcp and is connected to Internet" src="https://github.com/user-attachments/assets/f4322dda-e7f4-46be-97d4-b6c29ceeeff8" />
+
+Once network connectivity was confirmed, I reviewed the activity of the Windows Server in FortiView on the firewall. The server appeared immediately under the active devices list because it was generating traffic. 
+I checked the bandwidth usage, the number of sessions, and the destination IP addresses it was contacting.
+<img width="1907" height="497" alt="FortiView win ser" src="https://github.com/user-attachments/assets/904ae65a-8ef2-4126-a59e-f3b721ad6d8d" />
+<img width="1919" height="485" alt="FortiView sources for Win-server" src="https://github.com/user-attachments/assets/aaed9564-de03-4e78-b83e-643b8c0ecc96" />
+
+Finally, I opened the forward traffic log to review the individual packets leaving the server. I could see each connection showing the source address, the service used, the outgoing interface,
+the destination, and the policy that allowed the traffic. This confirmed that the firewall policies were applied correctly and that the SD WAN link was being used for internet access.
+<img width="1916" height="921" alt="Traffic Logs for Win-server" src="https://github.com/user-attachments/assets/15ac341d-842a-406e-a9df-d724e1c89fcb" />
+
+This test validated the entire setup. The LAN configuration, DHCP services, DNS settings, SD WAN routing, firewall rules, and monitoring tools all worked together exactly as intended.
+
+
+
+
 
 
 
