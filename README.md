@@ -264,6 +264,31 @@ By doing this, the firewall will automatically route traffic through the WAN lin
 <img width="1469" height="666" alt="Static Route config" src="https://github.com/user-attachments/assets/936dc79f-e4b7-431c-9342-e405cc0fdc25" />
 <img width="1858" height="442" alt="Static Route (sdwan link)" src="https://github.com/user-attachments/assets/85e98f9f-540a-4a03-bba5-06093b6e0194" />
 
+4-Firewall Policy Configuration
+
+Once the SD WAN link was fully configured and the default route was in place, I created the firewall policies that allow my internal networks to reach the internet.
+Each LAN segment needed its own policy because I built three separate networks for employees, SOC and monitoring systems, and administrative devices. I wanted clear traffic control for each zone while still pointing all outbound traffic toward the SD WAN virtual interface.
+
+LAN 1 to Internet
+
+The first policy connects the employee network on port3 to the virtual SD WAN link. The source and destination are set to all, and the schedule is always active. 
+I enabled NAT because I want internal devices to use the outgoing interface address. This allows LAN 1 clients to access external resources through whichever WAN link the SD WAN decides is the best path.
+<img width="1740" height="918" alt="Firewall Policies 1" src="https://github.com/user-attachments/assets/3617e96c-c44a-4a92-8e4c-b6f8aa5a1541" />
+
+LAN 2 to Internet
+
+The second policy connects the SOC and monitoring network on port4 to the virtual SD WAN link.
+I used the same configuration settings because this network also needs open internet access for updates, package installation, and integrations such as Wazuh and Zabbix. NAT is enabled and the inspection mode uses the default flow based method.
+<img width="1284" height="923" alt="FW Policies 2" src="https://github.com/user-attachments/assets/28e832e5-c34b-4e8d-bfc3-7bbaf9cab971" />
+
+Administrative Considerations
+
+I did not apply any security profiles yet because the focus at this stage was basic connectivity. Later in the project I will enable profiles such as web filtering, application control, and IPS when I start testing security and logging. For now, the policies ensure clean outbound communication from each LAN to the internet while maintaining control over which zones are allowed to exit the network.
+
+Result
+
+With these policies in place, all LAN networks can reach the internet through the SD WAN link. This creates a complete flow from interface configuration, SD WAN setup, DNS, static routing, and finally the firewall rules that allow the network to function.
+
 
 
 
