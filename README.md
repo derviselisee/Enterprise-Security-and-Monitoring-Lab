@@ -157,6 +157,7 @@ Both connections act like two separate internet service providers, which lets me
 In this part of the lab I focused on configuring the network interfaces of my FortiGate firewall. 
 My goal was to recreate a realistic enterprise layout with two independent WAN connections for SD WAN testing and three internal LAN networks that act as separate zones.
 I also reviewed the system event logs to confirm that all changes were applied correctly.
+
  A-WAN Interface Configuration
 
 I configured two different WAN links because I wanted the firewall to simulate a multi provider setup.
