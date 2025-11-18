@@ -176,5 +176,30 @@ This gives the firewall a second independent internet path. Both WAN interfaces 
 
 <img width="1919" height="923" alt="WAN 2 int configs" src="https://github.com/user-attachments/assets/94cd89d4-c7bc-45dc-8ca9-f87fb7feb785" />
 
+  B-LAN Interface Configuration
+
+I configured three LAN networks because I wanted clear separation between employees, SOC and monitoring systems, and administrative infrastructure.
+Each LAN uses manual addressing and runs its own DHCP server inside the firewall.
+
+LAN 1
+
+LAN 1 is assigned to port3 with the subnet 192.168.10.0. I configured the interface as a DHCP server that provides addresses in the range 192.168.10.2 to 192.168.10.50. 
+This network represents the employee workspace.
+<img width="1910" height="924" alt="Port3 LAN1 config" src="https://github.com/user-attachments/assets/b229af14-5d2a-4696-995a-ef2c98e8349f" />
+
+LAN 2
+
+LAN 2 is assigned to port4 with the subnet 192.168.60.0. It also runs a DHCP server that distributes addresses between 192.168.60.2 and 192.168.60.50.
+This network hosts my SOC and monitoring tools such as Wazuh, GLPI, and Zabbix.
+<img width="1909" height="924" alt="Port4 LAN2 config" src="https://github.com/user-attachments/assets/1a1f83c7-a3dc-44b3-ab9a-08760e9c94ba" />
+
+LAN 3
+
+LAN 3 is assigned to port5 with the subnet 10.10.10.0. I set the DHCP server to provide addresses from 10.10.10.2 to 10.10.10.20.
+This segment represents the administrative network for infrastructure and server management.
+<img width="1888" height="930" alt="Port5 LAN3 config" src="https://github.com/user-attachments/assets/46422e88-848c-45a7-a81c-993085d9fbe5" />
+
+All three LAN interfaces are up, they have their own address scopes, and they allow the lab machines to receive IP configurations automatically.
+
 
 
