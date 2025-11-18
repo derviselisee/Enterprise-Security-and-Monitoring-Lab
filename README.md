@@ -201,12 +201,58 @@ This segment represents the administrative network for infrastructure and server
 
 All three LAN interfaces are up, they have their own address scopes, and they allow the lab machines to receive IP configurations automatically.
 
-3-Reviewing System Events
+C-Reviewing System Events
 
 After applying the configuration, I opened the system event logs to confirm that all changes were recorded successfully.
 The logs show interface edits, DHCP server creation, global setting changes, and administrator login activity. 
 This helped me verify that every configuration step was correctly applied and recognized by the firewall.
 <img width="1907" height="921" alt="Systems Events (Logs)" src="https://github.com/user-attachments/assets/c671aba9-a112-4b09-874c-f4564a14e691" />
+
+3-SD WAN Configuration and Performance Monitoring
+
+After finishing the interface configuration for my WAN and LAN networks, I moved on to building the SD WAN setup. 
+My goal was to combine my two internet connections into a single virtual link and apply performance monitoring so the firewall could make intelligent routing decisions.
+
+A-Creating SD WAN Members
+
+The first step was to add both WAN interfaces as SD WAN members. I added port1 as WAN1 and port2 as WAN2. 
+Both interfaces had working internet connectivity because WAN1 was connected to my physical home network through the bridged mode and WAN2 was connected to the VMware NAT network.
+By placing both interfaces inside the virtual SD WAN link, I created a logical path that the firewall would use to manage traffic based on performance.
+<img width="1861" height="712" alt="SD-WAN members" src="https://github.com/user-attachments/assets/3727d147-6e0f-43d2-b771-8cba79ac98d2" />
+
+B-Setting Up the Performance SLA
+
+Once the members were created, I configured a performance SLA to measure latency, jitter, and packet loss.
+I named it “Ping Google DNS” because I used two reliable public DNS servers as targets: 8.8.8.8 and 1.1.1.1.
+
+I chose active probe mode and used the ping protocol because it gives consistent results for basic link quality.
+I applied the SLA to both WAN connections so the firewall would check each link independently.
+
+To create realistic thresholds, I configured values for latency, jitter, and packet loss.
+I also set the failure and recovery counts because I wanted the link to be marked inactive only after several failed probes, not after a single bad response.
+<img width="1556" height="894" alt="Performance SLAs configs" src="https://github.com/user-attachments/assets/c97ea49c-d094-41b6-aac1-80cd3223ba1e" />
+
+Observing Performance Results
+
+After enabling the SLA, I opened the performance dashboard to watch both WAN links in real time. 
+The firewall displayed packet loss, latency, and jitter for each interface. Both connections remained stable with zero packet loss and very low jitter.
+Latency averaged around fifteen milliseconds on both links because they both had direct access to the internet.
+
+Seeing these metrics confirmed that both WAN paths were healthy and that the SD WAN logic had accurate data to use for routing decisions.
+<img width="1911" height="700" alt="SD-WAN latency performance" src="https://github.com/user-attachments/assets/8d8cc322-de34-40f0-8f23-b61b5bf65563" />
+<img width="1914" height="664" alt="SD-WAN jitter perfomance" src="https://github.com/user-attachments/assets/fbdf2b99-6fba-4f03-9634-def90bde74ed" />
+
+Creating the Static Route
+
+With the SD WAN link operating correctly, I created the default route that sends all outbound traffic through the virtual WAN interface.
+I configured a static route with the destination 0.0.0.0 and selected the SD WAN link as the outgoing interface. This allowed the firewall to use its performance monitoring to choose the best link at any moment.
+
+By doing this, the firewall will automatically route traffic through the WAN link that meets the SLA requirements and fail over smoothly if one path experiences delays or drops.
+<img width="1469" height="666" alt="Static Route config" src="https://github.com/user-attachments/assets/936dc79f-e4b7-431c-9342-e405cc0fdc25" />
+
+
+
+
 
 
 
