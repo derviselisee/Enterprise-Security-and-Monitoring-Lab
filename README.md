@@ -157,6 +157,23 @@ Both connections act like two separate internet service providers, which lets me
 In this part of the lab I focused on configuring the network interfaces of my FortiGate firewall. 
 My goal was to recreate a realistic enterprise layout with two independent WAN connections for SD WAN testing and three internal LAN networks that act as separate zones.
 I also reviewed the system event logs to confirm that all changes were applied correctly.
-<img width="1919" height="923" alt="WAN 2 int configs" src="https://github.com/user-attachments/assets/94cd89d4-c7bc-45dc-8ca9-f87fb7feb785" />
+ A-WAN Interface Configuration
+
+I configured two different WAN links because I wanted the firewall to simulate a multi provider setup.
+This allows me to test SD WAN performance, failover, and routing decisions.
+
+WAN 1
+
+WAN 1 is mapped to port1. It receives an address from my physical home network through DHCP because the interface is connected to the VMware bridged network. 
+The firewall successfully obtained an IP address, a default gateway, and DNS information. The interface is up and reachable, which confirms that the link is active.
 <img width="1912" height="921" alt="WAN 1 int config" src="https://github.com/user-attachments/assets/208327c5-c46a-42d1-b004-f728c19c5335" />
+
+WAN 2
+
+WAN 2 is mapped to port2. This interface is connected to the VMware NAT network. It also receives its configuration through DHCP. 
+This gives the firewall a second independent internet path. Both WAN interfaces are fully operational and ready for SD WAN membership.
+
+<img width="1919" height="923" alt="WAN 2 int configs" src="https://github.com/user-attachments/assets/94cd89d4-c7bc-45dc-8ca9-f87fb7feb785" />
+
+
 
