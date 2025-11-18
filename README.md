@@ -1,6 +1,51 @@
 # Enterprise-Security-and-Monitoring-Lab
 
 Enterprise Security and Monitoring Lab with AD, LDAP, Wazuh, Zabbix, GLPI, and Kali Linux
+**Lab Setup Overview
+
+My homelab is built to mirror how a real company structures its network, security, and authentication systems. 
+Each virtual machine plays a dedicated role that helps me test enterprise concepts such as identity management, threat detection, monitoring, and firewall security.**
+<img width="826" height="394" alt="Screenshot 2025-11-17 224826" src="https://github.com/user-attachments/assets/81c0de4e-002e-4c4b-83dd-2729a3991582" />
+
+Ubuntu Server
+
+I use Ubuntu as the main platform for GLPI and Zabbix. Ubuntu provides a reliable foundation for IT asset management, helpdesk operations, and infrastructure monitoring. 
+This allows me to simulate how organizations track devices, manage tickets, and monitor system health.
+
+Debian Server
+
+My Debian server runs Wazuh, which acts as the central SIEM and endpoint security platform. It collects logs, analyzes activity, and detects threats across the network. 
+This system helps me practice real SOC workflows such as threat hunting, alert review, and incident response.
+
+Windows Server 2022
+
+This server is configured as my domain controller for Active Directory. It manages user accounts, groups, authentication, and directory services for my entire environment.
+I rely on it for LDAP, Kerberos, Group Policy, and future FSSO integration. Because of this, it becomes the foundation for identity based security and centralized administration.
+
+Windows 10
+
+My Windows 10 machine simulates a standard employee workstation. It helps me test domain logins, GPOs, endpoint monitoring, application behavior, and normal user activity inside a company network.
+
+Windows 7
+
+This system acts as a vulnerable workstation for security testing. I use it to simulate attacks, exploit attempts, and malware behavior. 
+It allows me to validate how Wazuh, Zabbix, and the firewall respond to risky or suspicious activity.
+
+Kali Linux
+
+Kali is my penetration testing machine. It allows me to generate controlled attacks such as brute force attempts, scans, exploits, and lateral movement. 
+This creates realistic security events that I can analyze in my SOC tools.
+
+FGT-HQ
+
+FGT-HQ is the primary FortiGate firewall that secures the entire lab. It handles routing, NAT, SD-WAN, identity based policies, IPS, and monitoring.
+It represents the main corporate firewall in an enterprise environment.
+
+MY-FORTIGATE
+
+This second FortiGate appliance is dedicated to High Availability testing. 
+I use it to configure and validate HA behavior such as redundancy, synchronization, failover, and heartbeat monitoring.
+
 
 Mission Context
 
