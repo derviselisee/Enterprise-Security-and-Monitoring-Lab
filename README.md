@@ -201,5 +201,13 @@ This segment represents the administrative network for infrastructure and server
 
 All three LAN interfaces are up, they have their own address scopes, and they allow the lab machines to receive IP configurations automatically.
 
+3-Reviewing System Events
+
+After applying the configuration, I opened the system event logs to confirm that all changes were recorded successfully.
+The logs show interface edits, DHCP server creation, global setting changes, and administrator login activity. 
+This helped me verify that every configuration step was correctly applied and recognized by the firewall.
+<img width="1907" height="921" alt="Systems Events (Logs)" src="https://github.com/user-attachments/assets/c671aba9-a112-4b09-874c-f4564a14e691" />
+
+
 
 
