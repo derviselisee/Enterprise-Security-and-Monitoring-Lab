@@ -47,14 +47,14 @@ This second FortiGate appliance is dedicated to High Availability testing.
 I use it to configure and validate HA behavior such as redundancy, synchronization, failover, and heartbeat monitoring.
 
 
-MISSION CONTEXT
+## MISSION CONTEXT
 
 This project recreates a full enterprise network environment that combines identity services, firewall security, SD WAN, high availability, endpoint monitoring, and threat detection. 
 The goal is to design and operate a multi platform ecosystem where Windows and Linux clients authenticate through centralized identity systems, security logs are collected and analyzed,
 and FortiGate firewalls protect and monitor traffic. The lab simulates how real SOC and network engineering teams work together to manage authentication, system health, m
 monitoring, and incident detection across a modern enterprise network.
 
-IMPLEMENTATION SUMMARY
+## IMPLEMENTATION SUMMARY
 
 Core Infrastructure
 
@@ -90,7 +90,7 @@ Threat Simulation and Detection
 
 • Validated user mapping, event correlation, and incident triage across the environment.
 
-SKILLS DEMONSTRATED
+## SKILLS DEMONSTRATED
 
 • Windows Server administration, Active Directory structure design, user and device management, DNS and DHCP setup.
 
@@ -107,7 +107,6 @@ SKILLS DEMONSTRATED
 • Cross platform identity management with LDAP and user mapping through FSSO for security visibility.
 
 • Traffic inspection, log analysis, and session monitoring through FortiView and system logs.
-
 
 • Simulated attack generation with Kali Linux and detection across SIEM, monitoring dashboards, and firewall logs.
 
