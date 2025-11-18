@@ -232,7 +232,7 @@ To create realistic thresholds, I configured values for latency, jitter, and pac
 I also set the failure and recovery counts because I wanted the link to be marked inactive only after several failed probes, not after a single bad response.
 <img width="1556" height="894" alt="Performance SLAs configs" src="https://github.com/user-attachments/assets/c97ea49c-d094-41b6-aac1-80cd3223ba1e" />
 
-Observing Performance Results
+C-Observing Performance Results
 
 After enabling the SLA, I opened the performance dashboard to watch both WAN links in real time. 
 The firewall displayed packet loss, latency, and jitter for each interface. Both connections remained stable with zero packet loss and very low jitter.
@@ -242,7 +242,20 @@ Seeing these metrics confirmed that both WAN paths were healthy and that the SD 
 <img width="1911" height="700" alt="SD-WAN latency performance" src="https://github.com/user-attachments/assets/8d8cc322-de34-40f0-8f23-b61b5bf65563" />
 <img width="1914" height="664" alt="SD-WAN jitter perfomance" src="https://github.com/user-attachments/assets/fbdf2b99-6fba-4f03-9634-def90bde74ed" />
 
-Creating the Static Route
+D-DNS Configuration
+
+After completing the SD WAN setup and before moving into firewall policies, I configured the DNS settings on the FortiGate. 
+I wanted the firewall to use reliable public DNS servers for name resolution because this helps with faster lookups, stability, and accurate health checks for the SD WAN performance monitoring.
+
+I specified Google DNS as both the primary and secondary DNS servers by using the address 8.8.8.8. The firewall displayed the lookup time beside each entry, which confirmed that the DNS queries were working correctly. 
+I also reviewed the dynamically obtained DNS information coming from both WAN interfaces. WAN1 received its DNS address from the bridge connection on my home network, while WAN2 received its DNS address from the VMware NAT network.
+This allowed me to compare the latency on each link. WAN2 responded much faster because it was directly connected to the VMware NAT resolver, while WAN1 had higher latency since it depended on the physical router.
+
+By configuring static DNS servers and reviewing dynamic DNS information, I made sure the firewall always has consistent name resolution even if one WAN path becomes unstable. This helps improve SD WAN reliability, especially for SLA probes that depend on DNS.
+<img width="1702" height="921" alt="DNS Server" src="https://github.com/user-attachments/assets/18049bc8-4b19-4e2c-8e3b-d4a82809b408" />
+
+
+E-Creating the Static Route
 
 With the SD WAN link operating correctly, I created the default route that sends all outbound traffic through the virtual WAN interface.
 I configured a static route with the destination 0.0.0.0 and selected the SD WAN link as the outgoing interface. This allowed the firewall to use its performance monitoring to choose the best link at any moment.
