@@ -314,6 +314,36 @@ the destination, and the policy that allowed the traffic. This confirmed that th
 
 This test validated the entire setup. The LAN configuration, DHCP services, DNS settings, SD WAN routing, firewall rules, and monitoring tools all worked together exactly as intended.
 
+6-Deploying Windows Server for Active Directory, LDAP, and FSSO
+
+A-I deployed a Windows Server virtual machine because it plays a central role in any enterprise network.
+Windows Server acts as the backbone of identity, authentication, and centralized management in a company. It provides services that allow employees to log in securely, access shared resources, and follow company wide policies.
+I set up this Windows Server as a full Domain Controller and created my own domain named dervis.lab.
+<img width="1714" height="956" alt="I created my AD Domain (dervis lab)" src="https://github.com/user-attachments/assets/82608e63-d475-4527-a2ff-2e8645107a7e" />
+
+B-After promoting the server to a Domain Controller, I configured Active Directory Domain Services, which allowed me to introduce LDAP based authentication and prepare the environment for FSSO integration with my FortiGate. 
+I also designed the organizational structure by creating several Organizational Units for IT, HR, Finance, and Managers. Each OU contains user accounts that match real company departments.
+<img width="1715" height="927" alt="I created 4 differents OUs and their users  ( IT,HR,FINANCE and Managers)" src="https://github.com/user-attachments/assets/b924085e-4847-4a98-8214-c3bdb128fabe" />
+I added user accounts inside their appropriate OUs, which allows each user to inherit the correct department based policies.
+Creating multiple users helps simulate a real company network and prepares everything for LDAP authentication and future FSSO testing.
+
+C-I configured another user account inside Active Directory by defining the username, domain logon format, and password requirements. 
+This ensures that identity services are working correctly on the Domain Controller and confirms that my AD environment is ready for integration with other systems like FortiGate and GLPI.
+<img width="983" height="687" alt="AD user account 2" src="https://github.com/user-attachments/assets/527e5987-682a-4cc6-a824-ca1283df61db" />
+<img width="990" height="668" alt="AD (an user account)" src="https://github.com/user-attachments/assets/10682abe-f0d8-4bca-a491-40426d2f7f59" />
+
+This layout creates a strong foundation for identity management across the entire lab.
+It allows me to centralize authentication through LDAP and Kerberos.
+It improves how users, departments, and permissions are organized.
+It also supports identity driven firewall policies on the FortiGate.
+This structure mirrors how real companies manage access and user security.
+It prepares the environment for upcoming authentication labs, including full FSSO integration.
+
+
+
+
+
+
 
 
 
