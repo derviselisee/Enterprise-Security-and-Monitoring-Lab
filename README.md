@@ -1,7 +1,8 @@
-# Enterprise-Security-and-Monitoring-Lab
+## Enterprise-Security-and-Monitoring-Lab
 
-Enterprise Security and Monitoring Lab with AD, LDAP, Wazuh, Zabbix, GLPI, and Kali Linux
-**Lab Setup Overview
+#Enterprise Security and Monitoring Lab with AD, LDAP, Wazuh, Zabbix, GLPI, and Kali Linux
+
+## Lab Setup Overview
 
 My homelab is built to mirror how a real company structures its network, security, and authentication systems. 
 Each virtual machine plays a dedicated role that helps me test enterprise concepts such as identity management, threat detection, monitoring, and firewall security.**
