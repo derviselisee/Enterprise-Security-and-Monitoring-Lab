@@ -249,6 +249,8 @@ I configured a static route with the destination 0.0.0.0 and selected the SD WAN
 
 By doing this, the firewall will automatically route traffic through the WAN link that meets the SLA requirements and fail over smoothly if one path experiences delays or drops.
 <img width="1469" height="666" alt="Static Route config" src="https://github.com/user-attachments/assets/936dc79f-e4b7-431c-9342-e405cc0fdc25" />
+<img width="1858" height="442" alt="Static Route (sdwan link)" src="https://github.com/user-attachments/assets/85e98f9f-540a-4a03-bba5-06093b6e0194" />
+
 
 
 
