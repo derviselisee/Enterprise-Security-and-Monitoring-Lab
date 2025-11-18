@@ -116,3 +116,39 @@ and applied identity based policies while monitoring traffic and sessions throug
 
 • Installed and managed Wazuh SIEM on Debian for centralized log collection and alerting, deployed Zabbix and GLPI on Ubuntu Server
 for SNMP monitoring and IT asset management, and used Kali Linux to generate simulated attacks that were detected across SIEM and monitoring platforms.
+
+1-<img width="996" height="848" alt="MY-FORTIGATE interfaces" src="https://github.com/user-attachments/assets/78eff0c5-f420-40ef-85d6-c2aa80a4d4ad" />
+FortiGate Virtual Machine Network Setup
+
+I configured my FortiGate virtual machine inside VMware Workstation and assigned multiple network adapters in order to build a complete enterprise environment with three internal LANs and two external links for SD WAN testing.
+
+Inside the VM settings, I added several virtual network adapters and mapped each one to a different VMware network. 
+This allowed the FortiGate to see each adapter as a separate physical interface. From there, I assigned each interface to a specific purpose inside my lab.
+
+Internal LAN Segments
+
+I created three LAN environments, each with its own adapter and VLAN because I wanted clean segmentation that reflects a real enterprise network.
+
+LAN 1: Employees
+This segment is where all regular user systems stay. My Windows workstation is connected here.
+
+LAN 2: Monitoring and SOC
+This is the network where I placed Wazuh, Zabbix, GLPI, and other monitoring tools. Keeping them isolated helps protect the monitoring stack and gives me accurate data.
+
+LAN 3: Administration
+This network is dedicated to the domain controller and management access. It acts as the secure administrative plane of the environment.
+
+Each LAN is mapped to a different VMware LAN Segment, and each of those segments is assigned to a different FortiGate port.
+
+SD WAN Internet Interfaces
+
+I also prepared two WAN connections so I could test SD WAN features.
+
+Port 1
+I assigned port 1 to VMnet0, which is bridged to my actual physical home network. This gives the FortiGate a real internet path from my local router.
+
+Port 2
+I assigned port 2 to the NAT network in VMware. This gives the firewall a second, independent internet connection that behaves differently from the bridged one.
+
+Both connections act like two separate internet service providers, which lets me test SD WAN performance, failover, health checks, and traffic steering.
+
