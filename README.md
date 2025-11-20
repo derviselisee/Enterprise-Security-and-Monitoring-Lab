@@ -385,6 +385,81 @@ This structure mirrors how real companies manage access and user security.
 It prepares the environment for upcoming authentication labs, including full FSSO integration.
 
 
+## 7-Joining the  Windows 10 Client to the Active Directory Domain (dervis.lab)
+
+This how I deployed, configured, and validated a full Active Directory environment using Windows Server 2022 and a Windows 10 client. 
+The goal was to create the domain dervis.lab, join a workstation to that domain, and verify that domain based authentication works as expected. This is part of my enterprise homelab where identity, security, 
+and network management all connect.
+
+1. Deploying and Preparing the Domain Controller
+
+I began by deploying a Windows Server 2022 virtual machine inside my homelab. The server received its IP address from my FortiGate DHCP service. 
+I verified the network configuration with the ipconfig command. The server had the IPv4 address 192.168.60.2 with the gateway 192.168.60.1.
+
+Once connectivity was confirmed, I installed the Active Directory Domain Services role and promoted the server to a Domain Controller. During the promotion process, 
+I created the new domain which is called dervis.lab. After a reboot, the server became the first Domain Controller in the environment.
+
+To organize the domain in a way that reflects real enterprise structure, I used Active Directory Users and Computers to create OUs for IT, HR, Finance, Managers, and Users. 
+This gives me a clean and organized space for authentication, access control, and future Group Policy deployment.
+<img width="1648" height="959" alt="Windows Server configs" src="https://github.com/user-attachments/assets/f89228d1-018b-4c1e-98e1-e0a4e7f73966" />
+<img width="845" height="569" alt="no computers joined the domain yet" src="https://github.com/user-attachments/assets/ec9a797f-8331-4613-b0f5-9008381ae12a" />
+
+
+2. Preparing the Windows 10 Client
+
+Next, I deployed my Windows 10 client that will serve as a domain joined workstation. The client obtained its IP address from my FortiGate DHCP service automatically.
+Its configuration showed the IPv4 address 192.168.10.3 with the gateway 192.168.10.1.
+
+Since Active Directory requires clients to use the Domain Controller as their DNS server, 
+I modified the Windows 10 network settings. I changed the DNS server to 192.168.60.2 so the workstation could resolve domain records from the Domain Controller directly. 
+This step is critical because domain join requests depend on DNS service from the Domain Controller.
+<img width="1639" height="922" alt="I changed the dns settings of my  Win 10 client so I can join the domain" src="https://github.com/user-attachments/assets/7c924210-d155-449d-95e2-f05ed11115df" />
+<img width="1649" height="952" alt="Windows 10 configs" src="https://github.com/user-attachments/assets/92bd1376-4ce8-4bff-8bfe-54236cc55889" />
+
+3. Joining the Windows 10 Client to dervis.lab
+
+I opened the Access Work or School settings on the Windows 10 machine and selected the option to join a domain. I entered dervis.lab and provided the domain Administrator credentials.
+The client contacted the Domain Controller, authenticated successfully, and added the computer account to Active Directory.
+
+The system confirmed a successful join and requested a reboot. After restarting, the login screen displayed the domain sign in option with the prefix DERVIS.
+This confirmed that the system recognized the domain environment and was ready for domain based logins.
+
+Inside Active Directory Users and Computers, I saw the workstation registered automatically under the Computers container as DERVIS PC1.
+<img width="1645" height="954" alt="Windows 10 client is joining the domain(dervis lab)" src="https://github.com/user-attachments/assets/38db022b-c2b5-435e-97eb-9b247df5c2f7" />
+<img width="1640" height="970" alt="Win 10 client successfully joined the domain" src="https://github.com/user-attachments/assets/1a93f4b0-bd89-4496-b2b9-95c12b672653" />
+<img width="1644" height="954" alt="we can see our win 10 client has joined the domain" src="https://github.com/user-attachments/assets/e493ae46-1e5a-4665-bf9b-4be6feb68a4c" />
+
+4. Testing Domain Authentication with a Domain User
+
+To confirm that the domain join was fully functional, I created a domain user account named Man Dervis.
+I assigned this user a password and placed the account inside my Users container.
+
+On the Windows 10 machine, I attempted to sign in using the domain credentials for Man Dervis. 
+The workstation authenticated the user against the Domain Controller successfully and completed the login process.
+The session loaded with the identity DERVIS mandervis, which confirmed that the workstation trusts the Domain Controller and accepts domain user authentication.
+
+This test proved that the domain join was successful and that the workstation and Domain Controller communicate correctly for authentication, authorization, and identity handling.
+<img width="1646" height="920" alt="man dervis the user" src="https://github.com/user-attachments/assets/a1fad94a-a39f-4e47-977b-e96f0c466563" />
+<img width="1642" height="955" alt="user ( Man Dervis) is connecting" src="https://github.com/user-attachments/assets/67beed17-2eb7-4032-926b-53f60fb0d3a7" />
+<img width="1643" height="950" alt="Man Dervis ( an user) has successfully log in the desktop " src="https://github.com/user-attachments/assets/d092c80e-dad6-4aad-ac34-6ec94ece00ef" />
+
+5. Summary
+
+By completing these steps, I built a functional Active Directory environment and validated domain based authentication end to end.
+I deployed a Domain Controller, created the domain dervis.lab, organized the directory with proper OUs, prepared a Windows 10 client, configured DNS for domain resolution, 
+joined the client to the domain, and verified that a domain user could log in successfully. This workflow reflects real world enterprise identity and access management practices.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
