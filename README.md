@@ -151,7 +151,8 @@ Threat Simulation and Detection
 
 • FortiView and log analysis tools
 
-PURPOSE OF THIS PROJECT
+## PURPOSE OF THIS PROJECT
+
 This project recreates a realistic enterprise network designed to integrate identity services, firewall security, SD WAN connectivity, high availability, endpoint monitoring, and threat detection into one unified ecosystem.
 The objective is to build and operate a multi platform environment where Windows and Linux clients authenticate through centralized identity infrastructure, security events are collected and analyzed through SIEM and monitoring tools, and FortiGate firewalls enforce segmentation and protect network traffic. This lab mirrors how modern SOC and network engineering teams collaborate to manage authentication, system performance, monitoring workflows, and incident detection across a fully functional enterprise environment.
 
