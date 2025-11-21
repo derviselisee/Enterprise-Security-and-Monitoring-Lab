@@ -57,11 +57,8 @@ It helps me test redundancy, failover behavior, heartbeat communication, and con
 
 
 ## MISSION CONTEXT
-
-This project recreates a full enterprise network environment that combines identity services, firewall security, SD WAN, high availability, endpoint monitoring, and threat detection. 
-The goal is to design and operate a multi platform ecosystem where Windows and Linux clients authenticate through centralized identity systems, security logs are collected and analyzed,
-and FortiGate firewalls protect and monitor traffic. The lab simulates how real SOC and network engineering teams work together to manage authentication, system health, m
-monitoring, and incident detection across a modern enterprise network.
+This project recreates a realistic enterprise network designed to integrate identity services, firewall security, SD WAN connectivity, high availability, endpoint monitoring, and threat detection into one unified ecosystem. 
+The objective is to build and operate a multi platform environment where Windows and Linux clients authenticate through centralized identity infrastructure, security events are collected and analyzed through SIEM and monitoring tools, and FortiGate firewalls enforce segmentation and protect network traffic. This lab mirrors how modern SOC and network engineering teams collaborate to manage authentication, system performance, monitoring workflows, and incident detection across a fully functional enterprise environment.
 
 ## IMPLEMENTATION SUMMARY
 
@@ -153,8 +150,8 @@ Threat Simulation and Detection
 
 ## PURPOSE OF THIS PROJECT
 
-This project recreates a realistic enterprise network designed to integrate identity services, firewall security, SD WAN connectivity, high availability, endpoint monitoring, and threat detection into one unified ecosystem.
-The objective is to build and operate a multi platform environment where Windows and Linux clients authenticate through centralized identity infrastructure, security events are collected and analyzed through SIEM and monitoring tools, and FortiGate firewalls enforce segmentation and protect network traffic. This lab mirrors how modern SOC and network engineering teams collaborate to manage authentication, system performance, monitoring workflows, and incident detection across a fully functional enterprise environment.
+The purpose of this project is to design and operate a fully integrated enterprise style network where identity management, firewall security, monitoring, and threat detection work together as a unified system. 
+This lab allows me to practice real world workflows by centralizing authentication through Active Directory, enforcing security controls with FortiGate firewalls, and using SIEM and monitoring tools to track system health and detect malicious activity. The project provides a hands on environment that simulates how modern organizations secure their networks, monitor critical assets, and respond to incidents across diverse platforms.
 
 ## For Resume
 Enterprise Security and Monitoring Lab — Resume Bullet Points
