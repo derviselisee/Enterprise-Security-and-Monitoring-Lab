@@ -1,4 +1,4 @@
-## Enterprise-Security-and-Monitoring-Lab
+## ENTERPRISE SECURITY AND MONITORING LAB 
 
 #Enterprise Security and Monitoring Lab with AD, LDAP, Wazuh, Zabbix, GLPI, and Kali Linux
 
@@ -391,7 +391,7 @@ This how I deployed, configured, and validated a full Active Directory environme
 The goal was to create the domain dervis.lab, join a workstation to that domain, and verify that domain based authentication works as expected. This is part of my enterprise homelab where identity, security, 
 and network management all connect.
 
-1. Deploying and Preparing the Domain Controller
+A-Deploying and Preparing the Domain Controller
 
 I began by deploying a Windows Server 2022 virtual machine inside my homelab. The server received its IP address from my FortiGate DHCP service. 
 I verified the network configuration with the ipconfig command. The server had the IPv4 address 192.168.60.2 with the gateway 192.168.60.1.
@@ -405,7 +405,7 @@ This gives me a clean and organized space for authentication, access control, an
 <img width="845" height="569" alt="no computers joined the domain yet" src="https://github.com/user-attachments/assets/ec9a797f-8331-4613-b0f5-9008381ae12a" />
 
 
-2. Preparing the Windows 10 Client
+B-Preparing the Windows 10 Client
 
 Next, I deployed my Windows 10 client that will serve as a domain joined workstation. The client obtained its IP address from my FortiGate DHCP service automatically.
 Its configuration showed the IPv4 address 192.168.10.3 with the gateway 192.168.10.1.
@@ -416,7 +416,7 @@ This step is critical because domain join requests depend on DNS service from th
 <img width="1639" height="922" alt="I changed the dns settings of my  Win 10 client so I can join the domain" src="https://github.com/user-attachments/assets/7c924210-d155-449d-95e2-f05ed11115df" />
 <img width="1649" height="952" alt="Windows 10 configs" src="https://github.com/user-attachments/assets/92bd1376-4ce8-4bff-8bfe-54236cc55889" />
 
-3. Joining the Windows 10 Client to dervis.lab
+C-Joining the Windows 10 Client to dervis.lab
 
 I opened the Access Work or School settings on the Windows 10 machine and selected the option to join a domain. I entered dervis.lab and provided the domain Administrator credentials.
 The client contacted the Domain Controller, authenticated successfully, and added the computer account to Active Directory.
@@ -429,7 +429,7 @@ Inside Active Directory Users and Computers, I saw the workstation registered au
 <img width="1640" height="970" alt="Win 10 client successfully joined the domain" src="https://github.com/user-attachments/assets/1a93f4b0-bd89-4496-b2b9-95c12b672653" />
 <img width="1644" height="954" alt="we can see our win 10 client has joined the domain" src="https://github.com/user-attachments/assets/e493ae46-1e5a-4665-bf9b-4be6feb68a4c" />
 
-4. Testing Domain Authentication with a Domain User
+D-Testing Domain Authentication with a Domain User
 
 To confirm that the domain join was fully functional, I created a domain user account named Man Dervis.
 I assigned this user a password and placed the account inside my Users container.
@@ -443,11 +443,146 @@ This test proved that the domain join was successful and that the workstation an
 <img width="1642" height="955" alt="user ( Man Dervis) is connecting" src="https://github.com/user-attachments/assets/67beed17-2eb7-4032-926b-53f60fb0d3a7" />
 <img width="1643" height="950" alt="Man Dervis ( an user) has successfully log in the desktop " src="https://github.com/user-attachments/assets/d092c80e-dad6-4aad-ac34-6ec94ece00ef" />
 
-5. Summary
+E-Summary
 
 By completing these steps, I built a functional Active Directory environment and validated domain based authentication end to end.
 I deployed a Domain Controller, created the domain dervis.lab, organized the directory with proper OUs, prepared a Windows 10 client, configured DNS for domain resolution, 
 joined the client to the domain, and verified that a domain user could log in successfully. This workflow reflects real world enterprise identity and access management practices.
+
+## 8-Deploying  High Availability Cluster (Active Passive)
+In this part of my homelab build, I deployed a secondary FortiGate virtual appliance and configured a full high availability (HA) Active Passive cluster.
+My goal was to simulate a real enterprise firewall environment where redundancy, failover, heartbeat links, and monitored interfaces are essential for maintaining uptime.
+I configured VMware networking, prepared the management and heartbeat ports, verified communication, and then synchronized both units into a stable HA pair.
+
+A-Deploying the Secondary FortiGate and Preparing VMware Networking
+
+I began by deploying the second FortiGate VM in VMware Workstation. I assigned its hardware resources and then configured its network adapters to match the primary unit.
+
+Management Interface (Port 10)
+
+I set port10 to Bridged mode. This allowed me to reach the secondary FortiGate from my laptop using its assigned management IP address. 
+Once the system booted, I configured port10 to allow http, https, ping, and ssh, which made remote access easier.
+
+Heartbeat Interfaces (Port 7 and Port 8)
+
+I set ports 7 and 8 to VMnet2, an isolated virtual network that exists only between the FortiGate appliances. These two interfaces would later serve as the heartbeat links for the cluster.
+<img width="1269" height="842" alt="FGT secondary interfaces config" src="https://github.com/user-attachments/assets/5fb2b0b2-8f25-4e8b-b520-1534b4de9a17" />
+<img width="913" height="871" alt="FGT 2 configs" src="https://github.com/user-attachments/assets/74cecdf4-6530-4de8-92d5-fa531036d40b" />
+
+I configured the primary FortiGate the same way by placing its ports 7 and 8 in VMnet2. 
+This ensured that both appliances shared the same isolated network for heartbeat communication and could exchange cluster health and synchronization traffic reliably.
+<img width="878" height="799" alt="FGT-HQ interfaces ( Ports 7 and 8 are heartbeat)_" src="https://github.com/user-attachments/assets/2cd47ae9-4891-407d-b672-625bb04306db" />
+
+B-Understanding Heartbeat Interfaces and Why They Matter
+
+Heartbeat interfaces are dedicated links used exclusively for internal cluster communication.
+They allow both firewalls to check each other’s health in real time. When heartbeats stop, the cluster triggers a failover to maintain service availability.
+
+Heartbeat interfaces are important because they carry:
+
+-Health status checks
+
+-Cluster control traffic
+
+-Configuration synchronization
+
+-Session synchronization (if session pickup is enabled)
+
+Without reliable heartbeat links, the HA cluster cannot function correctly. Ports 7 and 8 in VMnet2 created a private, stable communication channel for the two FortiGates.
+
+C-Verifying Communication Between Both Firewalls
+
+Before forming the cluster, I verified that both FortiGates could reach each other.
+I used the CLI on each appliance and sent ping tests across the heartbeat network:
+
+execute ping <peer-IP>
+
+Both appliances responded successfully with zero packet loss. This confirmed that VMnet2 was working and that the heartbeat network was healthy.
+<img width="1916" height="1036" alt="both FGT can communicate " src="https://github.com/user-attachments/assets/dc7436cb-b7bf-4065-b80e-3000a630051d" />
+
+D-Configuring the HA Cluster
+
+Once communication was confirmed, I configured the HA cluster on both appliances using matching settings.
+
+Cluster Configuration Details
+
+-Mode: Active Passive
+
+-Group Name: HA CLUSTER
+
+-Password: redundancy
+
+-Primary Priority: 150
+
+-Secondary Priority: 125
+
+-Heartbeat Interfaces: port7 and port8
+
+-Session Pickup: Enabled
+
+After configuring these settings on the primary, I applied the same configuration to the secondary.
+The two units immediately synchronized, exchanged heartbeat signals, and formed a stable HA cluster.
+
+I also added the following interfaces as monitored interfaces:
+
+WAN1 (port1)
+
+WAN2 (port2)
+
+Employees (port3)
+
+SOC and NOC (port4)
+
+Admins (port5)
+
+What monitored interfaces are and why they matter
+
+Monitored interfaces help the cluster detect link failures. If a monitored interface goes down, the cluster can trigger a failover to the secondary unit. 
+This prevents outages and ensures that the firewall with the healthiest network path becomes the active device.
+
+This mirrors exactly how production networks maintain high uptime.
+<img width="1912" height="923" alt="HA cluster configurations on both FGTs" src="https://github.com/user-attachments/assets/7ce93b07-dc92-40e4-8a0d-dabd8cb6ab17" />
+<img width="870" height="500" alt="synchronization" src="https://github.com/user-attachments/assets/7d541624-2a7e-4dad-b51b-7e081be231f0" />
+<img width="1919" height="1033" alt="HA CLUSTER properly configured" src="https://github.com/user-attachments/assets/fe68e15d-6bc9-4e21-838d-5403cde8843a" />
+<img width="1903" height="782" alt="HA Logs" src="https://github.com/user-attachments/assets/bbb91f5b-2a01-4992-afcd-52e7a365d8a8" />
+<img width="1914" height="922" alt="systems HA status" src="https://github.com/user-attachments/assets/7ae4c61e-bc1f-4ad5-ba5c-986ced3f0484" />
+
+E-Final State and Validation
+I checked the interface configurations on both FortiGate appliances and confirmed that every port matches exactly.
+The IP addresses, administrative access settings, and network mappings are identical on both units, which means the HA cluster synchronized the interface settings correctly.
+This consistency shows that the secondary unit fully inherited the primary’s configuration and that both firewalls now operate as one unified system.
+<img width="1910" height="923" alt="HQ Primry Interfaces" src="https://github.com/user-attachments/assets/b4bd57eb-4d29-49b2-860c-f502303a8193" />
+<img width="1915" height="927" alt="HQ Secondary Interfaces   they are exactly the same " src="https://github.com/user-attachments/assets/88b83281-a926-4410-9b71-58d97574cf6d" />
+
+Once both units synchronized, I checked the HA Monitor dashboard. The cluster showed:
+
+Primary: FGT HQ
+
+Secondary: FGT HQ
+
+Status: Synchronized
+
+Heartbeat: Healthy
+
+Monitored Interfaces: All active
+
+Both FortiGates now behave as a single unified firewall. 
+Any configuration change on the primary automatically syncs to the secondary. The cluster will fail over smoothly if the primary becomes unavailable.
+<img width="1915" height="661" alt="HA cluster ( Primary)" src="https://github.com/user-attachments/assets/b1b51e41-5a27-4205-8f92-48d9be132d89" />
+<img width="1668" height="567" alt="secondary FGT" src="https://github.com/user-attachments/assets/7ba4d6b6-ff72-463b-bd7b-a86138cd5cea" />
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
