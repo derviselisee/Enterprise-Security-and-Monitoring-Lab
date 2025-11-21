@@ -152,23 +152,20 @@ Threat Simulation and Detection
 • FortiView and log analysis tools
 
 PURPOSE OF THIS PROJECT
-
-The purpose of this project is to build a complete enterprise style security and monitoring environment that mirrors how real SOC and network engineering teams operate. 
-The lab integrates identity management, firewall security, SIEM, SNMP monitoring, and IT operations systems to provide end to end visibility and control. 
-It supports centralized authentication, log analytics, performance monitoring, and incident detection while using simulated attacks to validate security coverage.
-This environment strengthens practical skills across Windows, Linux, and FortiGate platforms and provides hands on experience with the technologies commonly used in modern cybersecurity and IT operations.
+This project recreates a realistic enterprise network designed to integrate identity services, firewall security, SD WAN connectivity, high availability, endpoint monitoring, and threat detection into one unified ecosystem.
+The objective is to build and operate a multi platform environment where Windows and Linux clients authenticate through centralized identity infrastructure, security events are collected and analyzed through SIEM and monitoring tools, and FortiGate firewalls enforce segmentation and protect network traffic. This lab mirrors how modern SOC and network engineering teams collaborate to manage authentication, system performance, monitoring workflows, and incident detection across a fully functional enterprise environment.
 
 ## For Resume
-Enterprise Security and Monitoring Lab
+Enterprise Security and Monitoring Lab — Resume Bullet Points
 
-• Built a complete multi system enterprise environment that included a Windows Server domain, 
-Windows and Linux clients, LDAP authentication, and identity based visibility through Active Directory and FSSO.
+• Designed and deployed a full enterprise grade environment with Active Directory, Windows and Linux endpoints, LDAP authentication, 
+and identity based controls that provided end to end visibility across users, devices, and network activity.
 
-• Deployed FortiGate firewalls in VMware with SD WAN and high availability, configured dual WAN paths, created segmented networks, 
-and applied identity based policies while monitoring traffic and sessions through FortiView and security logs.
+• Implemented FortiGate firewalls in VMware with SD WAN and Active Passive HA, configured dual ISP paths, segmented internal networks, a
+nd enforced identity based security policies while monitoring real time traffic and events through FortiView and system logs.
 
-• Installed and managed Wazuh SIEM on Debian for centralized log collection and alerting, deployed Zabbix and GLPI on Ubuntu Server
-for SNMP monitoring and IT asset management, and used Kali Linux to generate simulated attacks that were detected across SIEM and monitoring platforms.
+• Built a complete SOC style monitoring stack by deploying Wazuh SIEM on Debian for log analysis and alerting, installing Zabbix and GLPI on Ubuntu Server for infrastructure monitoring and asset management,
+and generating controlled attacks from Kali Linux to validate detection and response capabilities.
 
 ## 1-FortiGate Virtual Machine Network Setup****
 <img width="996" height="848" alt="MY-FORTIGATE interfaces" src="https://github.com/user-attachments/assets/78eff0c5-f420-40ef-85d6-c2aa80a4d4ad" />
