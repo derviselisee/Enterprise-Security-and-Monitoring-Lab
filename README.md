@@ -4,48 +4,56 @@
 
 ## Lab Setup Overview
 
-My homelab is built to mirror how a real company structures its network, security, and authentication systems. 
-Each virtual machine plays a dedicated role that helps me test enterprise concepts such as identity management, threat detection, monitoring, and firewall security.**
-<img width="826" height="394" alt="Screenshot 2025-11-17 224826" src="https://github.com/user-attachments/assets/81c0de4e-002e-4c4b-83dd-2729a3991582" />
+My homelab is designed to mirror how a real company organizes its network, security tools, and authentication systems. 
+Each virtual machine has a specific role that helps me practice enterprise concepts such as identity management, monitoring, threat detection, and firewall security. 
+This setup allows me to build realistic SOC and IT workflows inside a fully controlled environment.
+<img width="363" height="428" alt="Lab setup" src="https://github.com/user-attachments/assets/f217f72c-b8c1-45ca-a2af-1bc3620e113f" />
 
-Ubuntu Server
+-Windows Server 2022
 
-I use Ubuntu as the main platform for GLPI and Zabbix. Ubuntu provides a reliable foundation for IT asset management, helpdesk operations, and infrastructure monitoring. 
-This allows me to simulate how organizations track devices, manage tickets, and monitor system health.
+This machine serves as my domain controller. It manages Active Directory, DNS, user accounts, groups, and authentication across the network. 
+It is the backbone of identity based security in my homelab and supports LDAP and future integrations such as FSSO.
 
-Debian Server
+-Windows 10
 
-My Debian server runs Wazuh, which acts as the central SIEM and endpoint security platform. It collects logs, analyzes activity, and detects threats across the network. 
-This system helps me practice real SOC workflows such as threat hunting, alert review, and incident response.
+My Windows 10 virtual machine represents a standard employee workstation.
+I use it to test domain logins, Group Policy behavior, endpoint monitoring, and normal user activity inside a corporate network.
 
-Windows Server 2022
+-Windows 7
 
-This server is configured as my domain controller for Active Directory. It manages user accounts, groups, authentication, and directory services for my entire environment.
-I rely on it for LDAP, Kerberos, Group Policy, and future FSSO integration. Because of this, it becomes the foundation for identity based security and centralized administration.
+This VM acts as a vulnerable legacy workstation. I use it to simulate outdated systems, test exploit behavior, and generate risky activity.
+It allows me to observe how my monitoring and SIEM tools respond to real threats.
 
-Windows 10
+-Debian (Wazuh SIEM Server)
 
-My Windows 10 machine simulates a standard employee workstation. It helps me test domain logins, GPOs, endpoint monitoring, application behavior, and normal user activity inside a company network.
+This Debian server runs Wazuh, which acts as the central SIEM and endpoint security platform. 
+It collects logs from every machine, analyzes activity, and alerts on suspicious events. 
+It helps me practice SOC tasks such as threat detection, alert triage, and incident response.
 
-Windows 7
+-Ubuntu Server (GLPI and Zabbix)
 
-This system acts as a vulnerable workstation for security testing. I use it to simulate attacks, exploit attempts, and malware behavior. 
-It allows me to validate how Wazuh, Zabbix, and the firewall respond to risky or suspicious activity.
+This Ubuntu Server hosts GLPI for IT asset management and helpdesk operations, and Zabbix for infrastructure monitoring. 
+It allows me to simulate how enterprises track devices, manage tickets, and monitor system performance and availability.
 
-Kali Linux
+-Ubuntu (Client Machine)
 
-Kali is my penetration testing machine. It allows me to generate controlled attacks such as brute force attempts, scans, exploits, and lateral movement. 
-This creates realistic security events that I can analyze in my SOC tools.
+I use this Ubuntu desktop VM as an additional client workstation. 
+It helps me test cross platform authentication, log collection, agent deployment, and monitoring from a Linux endpoint.
 
-FGT-HQ
+-Kali Linux
 
-FGT-HQ is the primary FortiGate firewall that secures the entire lab. It handles routing, NAT, SD-WAN, identity based policies, IPS, and monitoring.
-It represents the main corporate firewall in an enterprise environment.
+Kali is my attacker machine. I use it to generate controlled attacks such as scans, brute force attempts, and exploit activity, 
+allowing me to observe how my SIEM, firewall, and monitoring tools detect and respond to real threats.
 
-MY-FORTIGATE
+-FGT HQ (Primary FortiGate)
 
-This second FortiGate appliance is dedicated to High Availability testing. 
-I use it to configure and validate HA behavior such as redundancy, synchronization, failover, and heartbeat monitoring.
+This is the main FortiGate firewall that secures the entire lab. It handles routing, NAT, security profiles, identity based policies, and traffic inspection. 
+It represents the core enterprise firewall in my environment.
+
+-FGT HQ2 (Secondary FortiGate for HA)
+
+This FortiGate is dedicated to High Availability testing. I pair it with the primary firewall to build an Active Passive HA cluster.
+It helps me test redundancy, failover behavior, heartbeat communication, and configuration synchronization.
 
 
 ## MISSION CONTEXT
@@ -450,6 +458,7 @@ I deployed a Domain Controller, created the domain dervis.lab, organized the dir
 joined the client to the domain, and verified that a domain user could log in successfully. This workflow reflects real world enterprise identity and access management practices.
 
 ## 8-Deploying  High Availability Cluster (Active Passive)
+
 In this part of my homelab build, I deployed a secondary FortiGate virtual appliance and configured a full high availability (HA) Active Passive cluster.
 My goal was to simulate a real enterprise firewall environment where redundancy, failover, heartbeat links, and monitored interfaces are essential for maintaining uptime.
 I configured VMware networking, prepared the management and heartbeat ports, verified communication, and then synchronized both units into a stable HA pair.
