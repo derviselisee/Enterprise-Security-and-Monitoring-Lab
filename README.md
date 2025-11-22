@@ -366,12 +366,16 @@ This test validated the entire setup. The LAN configuration, DHCP services, DNS 
 ## 6-Deploying Windows Server for Active Directory, LDAP, and FSSO
 
 A-I deployed a Windows Server virtual machine because it plays a central role in any enterprise network.
-Windows Server acts as the backbone of identity, authentication, and centralized management in a company. It provides services that allow employees to log in securely, access shared resources, and follow company wide policies.
+
+Windows Server acts as the backbone of identity, authentication, and centralized management in a company. 
+It provides services that allow employees to log in securely, access shared resources, and follow company wide policies.
 I set up this Windows Server as a full Domain Controller and created my own domain named dervis.lab.
 <img width="1714" height="956" alt="I created my AD Domain (dervis lab)" src="https://github.com/user-attachments/assets/82608e63-d475-4527-a2ff-2e8645107a7e" />
 
-B-After promoting the server to a Domain Controller, I configured Active Directory Domain Services, which allowed me to introduce LDAP based authentication and prepare the environment for FSSO integration with my FortiGate. 
+B-After promoting the server to a Domain Controller, I configured Active Directory Domain Services, 
+which allowed me to introduce LDAP based authentication and prepare the environment for FSSO integration with my FortiGate. 
 I also designed the organizational structure by creating several Organizational Units for IT, HR, Finance, and Managers. Each OU contains user accounts that match real company departments.
+
 <img width="1715" height="927" alt="I created 4 differents OUs and their users  ( IT,HR,FINANCE and Managers)" src="https://github.com/user-attachments/assets/b924085e-4847-4a98-8214-c3bdb128fabe" />
 I added user accounts inside their appropriate OUs, which allows each user to inherit the correct department based policies.
 Creating multiple users helps simulate a real company network and prepares everything for LDAP authentication and future FSSO testing.
@@ -387,6 +391,8 @@ It improves how users, departments, and permissions are organized.
 It also supports identity driven firewall policies on the FortiGate.
 This structure mirrors how real companies manage access and user security.
 It prepares the environment for upcoming authentication labs, including full FSSO integration.
+
+##
 
 
 ## 7-Joining the  Windows 10 Client to the Active Directory Domain (dervis.lab)
@@ -429,6 +435,7 @@ The system confirmed a successful join and requested a reboot. After restarting,
 This confirmed that the system recognized the domain environment and was ready for domain based logins.
 
 Inside Active Directory Users and Computers, I saw the workstation registered automatically under the Computers container as DERVIS PC1.
+
 <img width="1645" height="954" alt="Windows 10 client is joining the domain(dervis lab)" src="https://github.com/user-attachments/assets/38db022b-c2b5-435e-97eb-9b247df5c2f7" />
 <img width="1640" height="970" alt="Win 10 client successfully joined the domain" src="https://github.com/user-attachments/assets/1a93f4b0-bd89-4496-b2b9-95c12b672653" />
 <img width="1644" height="954" alt="we can see our win 10 client has joined the domain" src="https://github.com/user-attachments/assets/e493ae46-1e5a-4665-bf9b-4be6feb68a4c" />
