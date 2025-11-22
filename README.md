@@ -120,7 +120,7 @@ The objective is to build and operate a multi platform environment where Windows
 
 ## TOOLS AND TECHNOLOGIES USED
 
--Operating Systems 💻
+  ## -Operating Systems 💻
 
 • Windows Server 2022 (Primary Domain Controller/Identity)
 
@@ -130,7 +130,7 @@ The objective is to build and operate a multi platform environment where Windows
 
 • Ubuntu Server (Monitoring/SIEM Host)
 
--Security and Monitoring 🛡️
+  ## -Security and Monitoring 🛡️
 
 • Wazuh SIEM: Security monitoring, log collection, and threat detection.
 
@@ -142,7 +142,7 @@ The objective is to build and operate a multi platform environment where Windows
 
 • FortiView & Log Analysis Tools: Real-time visualization and interpretation of security logs.
 
--Networking and Security Protocols 🌐
+  ## -Networking and Security Protocols 🌐
 
 • FortiGate Firewall (VM): Central security enforcement, routing, segmentation, and inspection.
 
@@ -156,7 +156,7 @@ The objective is to build and operate a multi platform environment where Windows
 
 • IPsec VPN: Used for the site-to-site tunnel connecting the hybrid environment.
 
--Cloud and Virtualization ☁️
+  ## -Cloud and Virtualization ☁️
 
 • Microsoft Azure: Hosts the cloud portion of the lab (FortiGate VM and client).
 
@@ -164,7 +164,7 @@ The objective is to build and operate a multi platform environment where Windows
 
 • VMware Workstation: The core virtualization platform used to host the entire on-premises lab.
 
--Administration Tools ⚙️
+  ## -Administration Tools ⚙️
 
 • SecureCRT: Client used for remote command-line management.
 
