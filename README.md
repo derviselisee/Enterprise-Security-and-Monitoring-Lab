@@ -116,27 +116,7 @@ The objective is to build and operate a multi platform environment where Windows
 • Threat simulation and detection, using Kali Linux to conduct scanning, enumeration, and intrusion attempts validated through SIEM and firewall logs.
 
 • Enterprise troubleshooting, including multi layered debugging across networking, firewalls, Windows, Linux, hybrid cloud, and security monitoring components.
-## gu
 
-• Windows Server administration, Active Directory structure design, user and device management, DNS and DHCP setup.
-
-• FortiGate deployment with SD WAN configuration, high availability setup, and identity based firewall rules using LDAP and FSSO.
-
-• Linux system deployment across Ubuntu and Debian, including service installation and authentication integration.
-
-• SIEM log collection, alerting, and event correlation through Wazuh for Windows, Linux, and firewall activity.
-
-• SNMP based monitoring and alerting using Zabbix for system performance and network visibility.
-
-• IT asset inventory and ticket management using GLPI to replicate enterprise IT workflows.
-
-• Cross platform identity management with LDAP and user mapping through FSSO for security visibility.
-
-• Traffic inspection, log analysis, and session monitoring through FortiView and system logs.
-
-• Simulated attack generation with Kali Linux and detection across SIEM, monitoring dashboards, and firewall logs.
-
-• Enterprise level troubleshooting across networking, firewall, Windows, and Linux environments.
 
 ## TOOLS AND TECHNOLOGIES USED
 
@@ -207,7 +187,7 @@ nd enforced identity based security policies while monitoring real time traffic 
 • Built a complete SOC style monitoring stack by deploying Wazuh SIEM on Debian for log analysis and alerting, installing Zabbix and GLPI on Ubuntu Server for infrastructure monitoring and asset management,
 and generating controlled attacks from Kali Linux to validate detection and response capabilities.
 
-## 1-FortiGate Virtual Machine Network Setup
+## FortiGate Network Setup
 
 <img width="996" height="848" alt="MY-FORTIGATE interfaces" src="https://github.com/user-attachments/assets/78eff0c5-f420-40ef-85d6-c2aa80a4d4ad" />
 
@@ -359,13 +339,13 @@ By doing this, the firewall will automatically route traffic through the WAN lin
 Once the SD WAN link was fully configured and the default route was in place, I created the firewall policies that allow my internal networks to reach the internet.
 Each LAN segment needed its own policy because I built three separate networks for employees, SOC and monitoring systems, and administrative devices. I wanted clear traffic control for each zone while still pointing all outbound traffic toward the SD WAN virtual interface.
 
-LAN 1 to Internet
+-LAN 1 to Internet
 
 The first policy connects the employee network on port3 to the virtual SD WAN link. The source and destination are set to all, and the schedule is always active. 
 I enabled NAT because I want internal devices to use the outgoing interface address. This allows LAN 1 clients to access external resources through whichever WAN link the SD WAN decides is the best path.
 <img width="1740" height="918" alt="Firewall Policies 1" src="https://github.com/user-attachments/assets/3617e96c-c44a-4a92-8e4c-b6f8aa5a1541" />
 
-LAN 2 to Internet
+-LAN 2 to Internet
 
 The second policy connects the SOC and monitoring network on port4 to the virtual SD WAN link.
 I used the same configuration settings because this network also needs open internet access for updates, package installation, and integrations such as Wazuh and Zabbix. NAT is enabled and the inspection mode uses the default flow based method.
@@ -373,7 +353,9 @@ I used the same configuration settings because this network also needs open inte
 
 Administrative Considerations
 
-I did not apply any security profiles yet because the focus at this stage was basic connectivity. Later in the project I will enable profiles such as web filtering, application control, and IPS when I start testing security and logging. For now, the policies ensure clean outbound communication from each LAN to the internet while maintaining control over which zones are allowed to exit the network.
+I did not apply any security profiles yet because the focus at this stage was basic connectivity. 
+Later in the project I will enable profiles such as web filtering, application control, and IPS when I start testing security and logging. For now, 
+the policies ensure clean outbound communication from each LAN to the internet while maintaining control over which zones are allowed to exit the network.
 
 Result
 
@@ -384,6 +366,7 @@ With these policies in place, all LAN networks can reach the internet through th
 
 After finishing the routing and firewall policy configuration, I deployed a Windows Server 2022 virtual machine to test whether the environment was functioning correctly. 
 I connected the server to the correct LAN segment in VMware so it would join the network through the Employees or SOC interface on the FortiGate, depending on the segment I selected.
+
 <img width="1570" height="903" alt="Win-server interfaces 2" src="https://github.com/user-attachments/assets/b53ea09d-8598-4d4c-9ef2-f36b4d306586" />
 
 When the system started, it automatically received its network configuration through DHCP. The server successfully obtained an IP address, its subnet mask, the default gateway, 
@@ -391,6 +374,7 @@ and the DNS server from the FortiGate. This confirmed that the internal DHCP ser
 I then opened a command prompt and tested basic connectivity by pinging two important destinations. First, I pinged 8.8.8.8 to confirm that the server could reach the internet through the SD WAN link.
 The replies came back with normal latency, which showed that outbound traffic was working. I also pinged the default gateway to verify internal communication between the server and the FortiGate.
 Both tests succeeded without any packet loss.
+
 <img width="1716" height="958" alt="Win-server got an address via dhcp and is connected to Internet" src="https://github.com/user-attachments/assets/f4322dda-e7f4-46be-97d4-b6c29ceeeff8" />
 
 Once network connectivity was confirmed, I reviewed the activity of the Windows Server in FortiView on the firewall. The server appeared immediately under the active devices list because it was generating traffic. 
@@ -400,6 +384,7 @@ I checked the bandwidth usage, the number of sessions, and the destination IP ad
 
 Finally, I opened the forward traffic log to review the individual packets leaving the server. I could see each connection showing the source address, the service used, the outgoing interface,
 the destination, and the policy that allowed the traffic. This confirmed that the firewall policies were applied correctly and that the SD WAN link was being used for internet access.
+
 <img width="1916" height="921" alt="Traffic Logs for Win-server" src="https://github.com/user-attachments/assets/15ac341d-842a-406e-a9df-d724e1c89fcb" />
 
 This test validated the entire setup. The LAN configuration, DHCP services, DNS settings, SD WAN routing, firewall rules, and monitoring tools all worked together exactly as intended.
@@ -410,7 +395,8 @@ A-I deployed a Windows Server virtual machine because it plays a central role in
 
 Windows Server acts as the backbone of identity, authentication, and centralized management in a company. 
 It provides services that allow employees to log in securely, access shared resources, and follow company wide policies.
-I set up this Windows Server as a full Domain Controller and created my own domain named dervis.lab.
+I set up this Windows Server as a full Domain Controller and created my own domain named ## dervis.lab.
+
 <img width="1714" height="956" alt="I created my AD Domain (dervis lab)" src="https://github.com/user-attachments/assets/82608e63-d475-4527-a2ff-2e8645107a7e" />
 
 B-After promoting the server to a Domain Controller, I configured Active Directory Domain Services, 
@@ -423,6 +409,7 @@ Creating multiple users helps simulate a real company network and prepares every
 
 C-I configured another user account inside Active Directory by defining the username, domain logon format, and password requirements. 
 This ensures that identity services are working correctly on the Domain Controller and confirms that my AD environment is ready for integration with other systems like FortiGate and GLPI.
+
 <img width="983" height="687" alt="AD user account 2" src="https://github.com/user-attachments/assets/527e5987-682a-4cc6-a824-ca1283df61db" />
 <img width="990" height="668" alt="AD (an user account)" src="https://github.com/user-attachments/assets/10682abe-f0d8-4bca-a491-40426d2f7f59" />
 
@@ -569,18 +556,23 @@ This approach reflects how enterprises enforce identity based access control.
 
 A-Installing the FSSO Components on Windows Server
 
-I began on my domain controller, which hosts the dervis.lab Active Directory domain. The FSSO system requires two components, and I installed both of them on the same server because this keeps the setup simple in a homelab environment.
+I began on my domain controller, which hosts the dervis.lab Active Directory domain. 
+The FSSO system requires two components, and I installed both of them on the same server because this keeps the setup simple in a homelab environment.
 
 What I installed
 
-DC Agent
+-DC Agent
 The DC Agent monitors the Windows Security log and detects domain logon events. It captures information such as usernames, the IP addresses of devices, and login timestamps.
 This allows the FortiGate to know which user is active on each workstation.
 
-FSSO Collector Agent
+<img width="1560" height="957" alt="dc agent installation" src="https://github.com/user-attachments/assets/e237bc79-553b-4e86-b685-f12e6aadb514" />
+
+
+-FSSO Collector Agent
 The Collector Agent receives logon information from the DC Agent and forwards the user to IP mappings to the FortiGate. 
 It also sends group membership information so that the firewall can apply identity based policies.
 This component is essential because it acts as the link between the domain controller and the FortiGate.
+
 <img width="1560" height="957" alt="dc agent installation" src="https://github.com/user-attachments/assets/7862dcbe-0c4e-447e-b632-3e66ff285c14" />
 <img width="1551" height="954" alt="FSSO setup installation" src="https://github.com/user-attachments/assets/b61e11e1-da68-4162-87aa-377baf56d59a" />
 <img width="1555" height="953" alt="fsso SETUP" src="https://github.com/user-attachments/assets/25f1578a-7755-44dc-9eac-ec9be0c1c096" />
@@ -601,7 +593,8 @@ This is the port used by the Collector Agent, and opening it ensured that the Fo
 
 C-Integrating Active Directory with FortiGate
 
-On the FortiGate, I added a new FSSO server entry under the User and Authentication menu. I entered the IP address of my Windows Server, applied the same password I set earlier, and tested the connection.
+On the FortiGate, I added a new FSSO server entry under the User and Authentication menu. 
+I entered the IP address of my Windows Server, applied the same password I set earlier, and tested the connection.
 The firewall immediately connected to the Collector Agent, which confirmed that the setup was working.
 
 After the connection was established, FortiGate pulled my Active Directory structure automatically. I created a user group named Remote Users and added my domain accounts to it. 
@@ -609,6 +602,7 @@ Because FSSO provides group membership details directly from Active Directory, F
 
 This integration now allows my firewall to build policies based on real user identities. The system can apply rules according to the person who is logged in rather than relying only on IP addresses or network segments.
 This mirrors how modern enterprise networks enforce access control.
+
 <img width="1915" height="658" alt="FFSO is deployed properly" src="https://github.com/user-attachments/assets/d7ac862d-3e86-4e7d-b8b2-49fa2c1e7b13" />
 <img width="1915" height="658" alt="FFSO is deployed properly" src="https://github.com/user-attachments/assets/65165fd2-412b-4d8f-9616-f0e9df3cadcc" />
 
@@ -630,19 +624,21 @@ A-Deploying the Secondary FortiGate and Preparing VMware Networking
 
 I began by deploying the second FortiGate VM in VMware Workstation. I assigned its hardware resources and then configured its network adapters to match the primary unit.
 
-Management Interface (Port 10)
+-Management Interface (Port 10)
 
 I set port10 to Bridged mode. This allowed me to reach the secondary FortiGate from my laptop using its assigned management IP address. 
 Once the system booted, I configured port10 to allow http, https, ping, and ssh, which made remote access easier.
 
-Heartbeat Interfaces (Port 7 and Port 8)
+-Heartbeat Interfaces (Port 7 and Port 8)
 
 I set ports 7 and 8 to VMnet2, an isolated virtual network that exists only between the FortiGate appliances. These two interfaces would later serve as the heartbeat links for the cluster.
+
 <img width="1269" height="842" alt="FGT secondary interfaces config" src="https://github.com/user-attachments/assets/5fb2b0b2-8f25-4e8b-b520-1534b4de9a17" />
 <img width="913" height="871" alt="FGT 2 configs" src="https://github.com/user-attachments/assets/74cecdf4-6530-4de8-92d5-fa531036d40b" />
 
 I configured the primary FortiGate the same way by placing its ports 7 and 8 in VMnet2. 
 This ensured that both appliances shared the same isolated network for heartbeat communication and could exchange cluster health and synchronization traffic reliably.
+
 <img width="878" height="799" alt="FGT-HQ interfaces ( Ports 7 and 8 are heartbeat)_" src="https://github.com/user-attachments/assets/2cd47ae9-4891-407d-b672-625bb04306db" />
 
 B-Understanding Heartbeat Interfaces and Why They Matter
@@ -713,6 +709,7 @@ Monitored interfaces help the cluster detect link failures. If a monitored inter
 This prevents outages and ensures that the firewall with the healthiest network path becomes the active device.
 
 This mirrors exactly how production networks maintain high uptime.
+
 <img width="1912" height="923" alt="HA cluster configurations on both FGTs" src="https://github.com/user-attachments/assets/7ce93b07-dc92-40e4-8a0d-dabd8cb6ab17" />
 <img width="870" height="500" alt="synchronization" src="https://github.com/user-attachments/assets/7d541624-2a7e-4dad-b51b-7e081be231f0" />
 <img width="1919" height="1033" alt="HA CLUSTER properly configured" src="https://github.com/user-attachments/assets/fe68e15d-6bc9-4e21-838d-5403cde8843a" />
@@ -723,6 +720,7 @@ E-Final State and Validation
 I checked the interface configurations on both FortiGate appliances and confirmed that every port matches exactly.
 The IP addresses, administrative access settings, and network mappings are identical on both units, which means the HA cluster synchronized the interface settings correctly.
 This consistency shows that the secondary unit fully inherited the primary’s configuration and that both firewalls now operate as one unified system.
+
 <img width="1910" height="923" alt="HQ Primry Interfaces" src="https://github.com/user-attachments/assets/b4bd57eb-4d29-49b2-860c-f502303a8193" />
 <img width="1915" height="927" alt="HQ Secondary Interfaces   they are exactly the same " src="https://github.com/user-attachments/assets/88b83281-a926-4410-9b71-58d97574cf6d" />
 
@@ -740,6 +738,7 @@ Monitored Interfaces: All active
 
 Both FortiGates now behave as a single unified firewall. 
 Any configuration change on the primary automatically syncs to the secondary. The cluster will fail over smoothly if the primary becomes unavailable.
+
 <img width="1915" height="661" alt="HA cluster ( Primary)" src="https://github.com/user-attachments/assets/b1b51e41-5a27-4205-8f92-48d9be132d89" />
 <img width="1668" height="567" alt="secondary FGT" src="https://github.com/user-attachments/assets/7ba4d6b6-ff72-463b-bd7b-a86138cd5cea" />
 
@@ -757,6 +756,7 @@ The machine received the address 192.168.72.54, which allowed me to access it th
 
 To work more comfortably, I connected to the server through SecureCRT. 
 This gave me a stable terminal where I could edit configuration files, follow installation guides, and manage packages with ease.
+
 <img width="1480" height="836" alt="I deploy my Ubuntu server ( Zabbix and GLPI)" src="https://github.com/user-attachments/assets/40ae7bbd-595a-435c-8f66-195d613feb23" />
 <img width="1152" height="1015" alt="I use SecureCRT to ssh my ubuntu server  I am installed GLPI" src="https://github.com/user-attachments/assets/80c5f570-ec30-46f0-afc7-5ca1d8734038" />
 
@@ -810,13 +810,14 @@ The installation script handled most of the configuration. When it finished, I a
 <img width="958" height="920" alt="access Wazuh dashboard" src="https://github.com/user-attachments/assets/1696190c-8266-425b-9de8-622f9d5d644a" />
 <img width="1919" height="921" alt="Wazuh Dashboard" src="https://github.com/user-attachments/assets/2887351b-928b-4cb3-902d-c60d79080584" />
 
-5. Summary of the Work Completed
+5. Summary 
 
 I deployed an Ubuntu Server and installed three major enterprise level tools: GLPI for asset management and helpdesk operations, Zabbix for real time monitoring, 
 and Wazuh for security visibility and threat detection. I used SecureCRT throughout the process to manage the server through SSH, which made the installation smooth and efficient.
 
 Each tool installed successfully, and I confirmed this by accessing the GLPI dashboard, the Zabbix dashboard, and the Wazuh dashboard.
-Together, these systems now form a strong IT and security operations environment inside my homelab. They replicate the same tools used in real organizations and allow me to practice managing, monitoring, and securing a complete enterprise style infrastructure.
+Together, these systems now form a strong IT and security operations environment inside my homelab.
+They replicate the same tools used in real organizations and allow me to practice managing, monitoring, and securing a complete enterprise style infrastructure.
 
 
 
