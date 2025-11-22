@@ -61,26 +61,26 @@ The objective is to build and operate a multi platform environment where Windows
 
 ## IMPLEMENTATION SUMMARY
 
-   Core Infrastructure
+   ## Core Infrastructure
 
 • Deployed Windows Server 2022 as the Active Directory domain controller for DNS, DHCP, and centralized identity services.
 • Joined a Windows 10 workstation to the domain and added an Ubuntu Desktop as a Linux client for cross platform testing.
 • Configured LDAP and FSSO so the FortiGate can authenticate users and enforce identity based firewall policies.
 
-  FortiGate Security, SD WAN, and HA
+  ## FortiGate Security, SD WAN, and HA
 
 • Deployed two FortiGate firewalls in VMware to create a high availability pair.
 • Configured SD WAN with one bridged WAN link and one NAT based WAN link for path selection and link quality monitoring.
 • Integrated the FortiGate cluster with Active Directory using LDAP and FSSO for real time identity based control.
 • Built internal segmentation and monitored all user activity through FortiView and firewall logs.
 
-   Security Monitoring and IT Management
+   ## Security Monitoring and IT Management
 
 • Installed a Wazuh server on Ubuntu for centralized SIEM, log analysis, and security event correlation.
 • Deployed Zabbix to monitor servers, network devices, and performance metrics using SNMP and Zabbix Agents.
 • Installed GLPI to manage inventory, documentation, and helpdesk workflows within the environment.
 
-   Azure Hybrid Cloud Integration
+   ## Azure Hybrid Cloud Integration
 
 • Deployed a FortiGate VM in Microsoft Azure alongside a Windows client in the same virtual network.
 • Configured a custom route table so the Azure Windows VM routes all outbound traffic through the Azure FortiGate for inspection.
@@ -88,45 +88,12 @@ The objective is to build and operate a multi platform environment where Windows
 • Enabled OSPF across the tunnel to automatically exchange subnets and maintain synchronized routing.
 • Used Azure Bastion for secure, clientless remote access to the cloud VM without exposing RDP to the internet.
 
-   Threat Simulation and Detection
+   ## Threat Simulation and Detection
 
 • Used Kali Linux to simulate port scans, brute force attempts, enumeration, and other adversarial techniques.
 • Verified detections through Wazuh alerts, FortiGate security logs, Windows event logs, and Zabbix performance spikes.
 • Confirmed full event correlation, identity mapping, and incident triage across the entire hybrid environment.
 
-Core Infrastructure
-
-• Deployed a Windows Server as the Active Directory domain controller providing DNS, DHCP, and user management.
-
-• Joined a Windows 10 workstation to the domain and added an Ubuntu desktop to represent a Linux client.
-
-• Created an LDAP environment for Linux authentication and enabled FSSO to map domain users to firewall policies.
-
-FortiGate Security, SD WAN, and HA
-
-• Deployed two FortiGate firewalls in VMware to build a high availability cluster.
-
-• Configured SD WAN by assigning Port1 as a bridged WAN link and Port2 as a NAT based WAN link, allowing the firewall to test path quality and select the best route.
-
-• Integrated the FortiGate cluster with Active Directory using LDAP and FSSO to apply identity based firewall policies and monitor user activity.
-
-• Created internal segmentation and enforced controlled access between systems, monitoring all sessions through FortiView and firewall logs.
-
-Security Monitoring and IT Management
-
-• Installed a Debian based Wazuh server to collect logs from Windows, Linux, and FortiGate systems.
-
-• Deployed Zabbix on Ubuntu Server for SNMP based monitoring of devices and system performance.
-
-• Installed GLPI for asset inventory, ticket management, and IT documentation, creating a realistic IT operations workflow.
-
-Threat Simulation and Detection
-
-• Used Kali Linux to perform controlled attacks such as network scanning, credential attempts, and enumeration.
-
-• Verified detection and alert generation through Wazuh, Windows logs, FortiGate security events, and Zabbix monitoring dashboards.
-
-• Validated user mapping, event correlation, and incident triage across the environment.
 
 ## SKILLS DEMONSTRATED
 
@@ -155,7 +122,6 @@ Threat Simulation and Detection
 -Operating Systems 💻
 
 • Windows Server 2022 (Primary Domain Controller/Identity)
-
 • Windows 10 (Domain Client)
 
 • Ubuntu Desktop (Linux Client)
