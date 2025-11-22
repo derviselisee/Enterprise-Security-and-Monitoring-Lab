@@ -97,6 +97,27 @@ The objective is to build and operate a multi platform environment where Windows
 
 ## SKILLS DEMONSTRATED
 
+• Windows Server administration, including Active Directory design, OU structuring, DNS and DHCP configuration, and domain joined workstation management.
+
+• FortiGate engineering, covering SD WAN setup, high availability deployment, routing, segmentation, NAT, and identity based firewall enforcement using LDAP and FSSO.
+
+• Linux system administration on Ubuntu Server and Ubuntu Desktop, including service installation, SSH based management, and integration with authentication and monitoring systems.
+
+• SIEM operations with Wazuh, including agent deployment, log ingestion, rule based alerting, and correlation of Windows, Linux, and firewall events.
+
+• Performance and availability monitoring with Zabbix, using SNMP and Zabbix Agents to track devices, servers, and network health.
+
+• IT asset and operations management with GLPI, including inventory tracking, helpdesk ticketing, and documentation workflows.
+
+• Identity integration across platforms, combining LDAP authentication with FSSO real time user mapping for visibility and policy enforcement.
+
+• Network traffic inspection and log analysis through FortiView, event logs, Syslog forwarding, and security monitoring dashboards.
+
+• Threat simulation and detection, using Kali Linux to conduct scanning, enumeration, and intrusion attempts validated through SIEM and firewall logs.
+
+• Enterprise troubleshooting, including multi layered debugging across networking, firewalls, Windows, Linux, hybrid cloud, and security monitoring components.
+## gu
+
 • Windows Server administration, Active Directory structure design, user and device management, DNS and DHCP setup.
 
 • FortiGate deployment with SD WAN configuration, high availability setup, and identity based firewall rules using LDAP and FSSO.
@@ -122,6 +143,7 @@ The objective is to build and operate a multi platform environment where Windows
 -Operating Systems 💻
 
 • Windows Server 2022 (Primary Domain Controller/Identity)
+
 • Windows 10 (Domain Client)
 
 • Ubuntu Desktop (Linux Client)
