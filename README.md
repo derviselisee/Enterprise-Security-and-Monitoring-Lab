@@ -7,6 +7,7 @@
 My homelab is designed to mirror how a real company organizes its network, security tools, and authentication systems. 
 Each virtual machine has a specific role that helps me practice enterprise concepts such as identity management, monitoring, threat detection, and firewall security. 
 This setup allows me to build realistic SOC and IT workflows inside a fully controlled environment.
+
 <img width="363" height="428" alt="Lab setup" src="https://github.com/user-attachments/assets/f217f72c-b8c1-45ca-a2af-1bc3620e113f" />
 
 -Windows Server 2022
