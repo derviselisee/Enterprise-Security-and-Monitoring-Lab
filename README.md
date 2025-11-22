@@ -29,7 +29,8 @@ It allows me to observe how my monitoring and SIEM tools respond to real threats
 
 This Ubuntu Server hosts GLPI for IT asset management and helpdesk operations, and Zabbix for infrastructure monitoring. 
 It allows me to simulate how enterprises track devices, manage tickets, and monitor system performance and availability.
- This server also  runs Wazuh, which acts as the central SIEM and endpoint security platform. 
+
+This server also  runs Wazuh, which acts as the central SIEM and endpoint security platform. 
 It collects logs from every machine, analyzes activity, and alerts on suspicious events. 
 It helps me practice SOC tasks such as threat detection, alert triage, and incident response.
 
