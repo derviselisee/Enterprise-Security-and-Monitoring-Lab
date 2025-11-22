@@ -166,7 +166,8 @@ nd enforced identity based security policies while monitoring real time traffic 
 • Built a complete SOC style monitoring stack by deploying Wazuh SIEM on Debian for log analysis and alerting, installing Zabbix and GLPI on Ubuntu Server for infrastructure monitoring and asset management,
 and generating controlled attacks from Kali Linux to validate detection and response capabilities.
 
-## 1-FortiGate Virtual Machine Network Setup****
+## 1-FortiGate Virtual Machine Network Setup
+
 <img width="996" height="848" alt="MY-FORTIGATE interfaces" src="https://github.com/user-attachments/assets/78eff0c5-f420-40ef-85d6-c2aa80a4d4ad" />
 
 I configured my FortiGate virtual machine inside VMware Workstation and assigned multiple network adapters in order to build a complete enterprise environment with three internal LANs and two external links for SD WAN testing.
@@ -303,7 +304,6 @@ This allowed me to compare the latency on each link. WAN2 responded much faster 
 By configuring static DNS servers and reviewing dynamic DNS information, I made sure the firewall always has consistent name resolution even if one WAN path becomes unstable. This helps improve SD WAN reliability, especially for SLA probes that depend on DNS.
 <img width="1702" height="921" alt="DNS Server" src="https://github.com/user-attachments/assets/18049bc8-4b19-4e2c-8e3b-d4a82809b408" />
 
-
 E-Creating the Static Route
 
 With the SD WAN link operating correctly, I created the default route that sends all outbound traffic through the virtual WAN interface.
@@ -363,7 +363,7 @@ the destination, and the policy that allowed the traffic. This confirmed that th
 
 This test validated the entire setup. The LAN configuration, DHCP services, DNS settings, SD WAN routing, firewall rules, and monitoring tools all worked together exactly as intended.
 
-## 6-Deploying Windows Server for Active Directory, LDAP, and FSSO
+## 6-Deploying Windows Server for Active Directory
 
 A-I deployed a Windows Server virtual machine because it plays a central role in any enterprise network.
 
@@ -392,8 +392,6 @@ It also supports identity driven firewall policies on the FortiGate.
 This structure mirrors how real companies manage access and user security.
 It prepares the environment for upcoming authentication labs, including full FSSO integration.
 
-##
-
 
 ## 7-Joining the  Windows 10 Client to the Active Directory Domain (dervis.lab)
 
@@ -413,7 +411,6 @@ To organize the domain in a way that reflects real enterprise structure, I used 
 This gives me a clean and organized space for authentication, access control, and future Group Policy deployment.
 <img width="1648" height="959" alt="Windows Server configs" src="https://github.com/user-attachments/assets/f89228d1-018b-4c1e-98e1-e0a4e7f73966" />
 <img width="845" height="569" alt="no computers joined the domain yet" src="https://github.com/user-attachments/assets/ec9a797f-8331-4613-b0f5-9008381ae12a" />
-
 
 B-Preparing the Windows 10 Client
 
@@ -459,6 +456,128 @@ E-Summary
 By completing these steps, I built a functional Active Directory environment and validated domain based authentication end to end.
 I deployed a Domain Controller, created the domain dervis.lab, organized the directory with proper OUs, prepared a Windows 10 client, configured DNS for domain resolution, 
 joined the client to the domain, and verified that a domain user could log in successfully. This workflow reflects real world enterprise identity and access management practices.
+
+## Deploying LDAP Authentication with Windows Server and FortiGate
+
+In this part of my homelab project, I connected my FortiGate firewall to my Windows Server Active Directory so it could authenticate users through their domain accounts.
+This approach matches real enterprise environments because it allows the firewall to identify who is on the network and apply access control based on identity rather than only on IP addresses.
+My goal was to create a foundation for user based security, monitoring, and future FSSO testing.
+
+A-Creating and Configuring the LDAP Server
+
+I prepared the Windows Server Domain Controller by confirming that Active Directory was fully operational under the domain name dervis.lab.
+I created several users inside my organized OU structure and also created a dedicated LDAP bind account. 
+This account allows FortiGate to query the directory securely whenever authentication is required.
+<img width="1715" height="927" alt="I created 4 differents OUs and their users  ( IT,HR,FINANCE and Managers)" src="https://github.com/user-attachments/assets/cca92b93-8991-4d7f-ad46-2ee2b7702777" />
+<img width="1645" height="953" alt="creation of an special user for LDAP server" src="https://github.com/user-attachments/assets/1fe92dfb-a3c1-4d81-aad9-21b99198ee0a" />
+
+On the FortiGate, I created an LDAP server entry and configured the following key settings:
+
+• Windows Server address and proper service port
+• sAMAccountName as the username format
+• Distinguished Name set to DC=dervis, DC=lab
+• Regular bind using the account DERVIS ldapbind
+
+I tested the connection and received a successful result, which confirmed that the firewall and Domain Controller were communicating correctly.
+<img width="1919" height="709" alt="LDAP Server created successfully" src="https://github.com/user-attachments/assets/a218ec09-6d66-48ad-804f-1a95ddee9e0b" />
+
+B-Importing Domain Identities into the Firewall
+
+Once the LDAP connection was verified, I opened the User Definition section on the FortiGate. The firewall displayed all my Active Directory accounts, which proved that the directory lookup was functioning the way it should. 
+I selected several users and imported them so the firewall could recognize them by name and enforce identity based rules.
+<img width="1914" height="515" alt="FGT Users Groups" src="https://github.com/user-attachments/assets/059ede8d-fc21-4e88-a151-7ea11dc690f2" />
+
+C-Creating the Remote Users Group
+
+To organize access control, I created a user group called Remote Users. I added the imported Active Directory accounts into this group. 
+This step is important because it gives the firewall a simple way to reference domain users inside security policies. It also mirrors how companies structure role based access across their networks.
+
+<img width="1913" height="824" alt="I created a group named (Remote Users)  FortiGate will verify their credentials , apply policies based on the user not just ip" src="https://github.com/user-attachments/assets/ad6b99c6-9048-48a5-8a4e-ad390fb0bbe3" />
+
+D-Testing LDAP Authentication with a Domain User
+
+To validate everything, I joined my Windows 10 client to the dervis.lab domain and logged in using one of the domain accounts.
+The authentication succeeded on the workstation, and the FortiGate immediately recognized the user identity in FortiView. I was able to see traffic, sessions, and activity tied directly to the correct username.
+I then added the Remote Users group to my LAN to Internet firewall policy. This allowed the FortiGate to permit or restrict traffic based on the authenticated user rather than only the workstation IP address.
+<img width="1917" height="925" alt="now I edited my firewall policy to add the remote user group" src="https://github.com/user-attachments/assets/ca27975c-d6df-4625-9281-42c6b23ef202" />
+
+I also expanded my testing by using the user Sara. I simulated her logging into the domain computer and browsing the internet. 
+The FortiGate displayed her identity in real time, which confirmed that LDAP was working correctly and that the firewall could monitor user level activity.
+
+<img width="1647" height="954" alt="lets test the ldap server with the user (Sara )" src="https://github.com/user-attachments/assets/80b72645-a71b-44bd-aa4e-2bf9bcb649b2" />
+<img width="1653" height="957" alt="TEST USER" src="https://github.com/user-attachments/assets/0c6d7059-4242-4112-b755-eaffdb9c1a66" />
+<img width="1642" height="955" alt="the user Sara has successfully logged into " src="https://github.com/user-attachments/assets/b067414c-5a8f-4723-a062-56cb170de649" />
+<img width="1917" height="692" alt="Thank to LDAP , I can see my user&#39;s activities now " src="https://github.com/user-attachments/assets/eda87897-87be-4df3-a08d-2bf2ccf163ca" />
+
+ At the same time, I tested my Ubuntu machine. Since Ubuntu is not joined to the domain, the FortiGate redirected it to the authentication page. 
+ This behavior showed that the firewall enforces identity based controls even for non domain devices.
+ <img width="1548" height="957" alt="ldap is working properly on ubuntu" src="https://github.com/user-attachments/assets/85f075cc-6dbb-4164-a586-08f90b02b176" />
+
+ E-Summary of the Implementation
+
+Through this setup, I successfully integrated FortiGate with my Active Directory using LDAP.
+I configured the bind account, connected the firewall to the domain, imported users, created a Remote Users group, and tested user authentication from a domain joined workstation. 
+This gives my enterprise lab a realistic identity driven security structure because the firewall can now enforce access, monitor activity, and log sessions using authenticated domain identities.
+
+## Implementing Fortinet FSSO for Identity Based Firewall Policies
+
+In this part of my homelab project, I deployed FortiGate Single Sign On to connect my firewall with my Windows Server Active Directory. 
+My goal was to let the firewall identify users automatically based on their Windows logins so that I could apply security policies according to usernames and groups instead of relying only on IP addresses. 
+This approach reflects how enterprises enforce identity based access control.
+<img width="1557" height="958" alt="FFSO components " src="https://github.com/user-attachments/assets/b7d6c272-792c-48fd-b926-f3e2df236628" />
+
+A-Installing the FSSO Components on Windows Server
+
+I began on my domain controller, which hosts the dervis.lab Active Directory domain. The FSSO system requires two components, and I installed both of them on the same server because this keeps the setup simple in a homelab environment.
+
+What I installed
+
+DC Agent
+The DC Agent monitors the Windows Security log and detects domain logon events. It captures information such as usernames, the IP addresses of devices, and login timestamps.
+This allows the FortiGate to know which user is active on each workstation.
+
+FSSO Collector Agent
+The Collector Agent receives logon information from the DC Agent and forwards the user to IP mappings to the FortiGate. 
+It also sends group membership information so that the firewall can apply identity based policies.
+This component is essential because it acts as the link between the domain controller and the FortiGate.
+<img width="1560" height="957" alt="dc agent installation" src="https://github.com/user-attachments/assets/7862dcbe-0c4e-447e-b632-3e66ff285c14" />
+<img width="1551" height="954" alt="FSSO setup installation" src="https://github.com/user-attachments/assets/b61e11e1-da68-4162-87aa-377baf56d59a" />
+<img width="1555" height="953" alt="fsso SETUP" src="https://github.com/user-attachments/assets/25f1578a-7755-44dc-9eac-ec9be0c1c096" />
+
+
+B-Configuring the FSSO Collector Agent
+
+After installing the agents, I opened the Collector Agent configuration. I added my domain controller to the monitored list and confirmed that the agent was reading Windows Security logs correctly.
+I configured a password for the FortiGate connection and verified that the service was running.
+
+Because I am using the polling method in this lab, the Collector Agent pulls logon information directly from the Windows Server event logs. 
+As soon as a domain user logs in, the agent detects the authentication event and records the username and IP address.
+<img width="1547" height="952" alt="FSSO setup part2" src="https://github.com/user-attachments/assets/66ecf22e-515d-44fe-bd92-48e3e662fc00" />
+
+To make sure the communication worked, I created a firewall rule on my Windows Server to allow traffic on TCP port 8000. 
+This is the port used by the Collector Agent, and opening it ensured that the FortiGate could reach the service without any issues.
+<img width="1554" height="958" alt="I created a polciy to allow traffic from tcp 8000 on windows server" src="https://github.com/user-attachments/assets/2698e5d6-17ac-41f7-bae6-cb7592be6e80" />
+
+C-Integrating Active Directory with FortiGate
+
+On the FortiGate, I added a new FSSO server entry under the User and Authentication menu. I entered the IP address of my Windows Server, applied the same password I set earlier, and tested the connection.
+The firewall immediately connected to the Collector Agent, which confirmed that the setup was working.
+
+After the connection was established, FortiGate pulled my Active Directory structure automatically. I created a user group named Remote Users and added my domain accounts to it. 
+Because FSSO provides group membership details directly from Active Directory, FortiGate was able to identify each domain user by name whenever they logged in to a Windows machine.
+
+This integration now allows my firewall to build policies based on real user identities. The system can apply rules according to the person who is logged in rather than relying only on IP addresses or network segments.
+This mirrors how modern enterprise networks enforce access control.
+<img width="1915" height="658" alt="FFSO is deployed properly" src="https://github.com/user-attachments/assets/d7ac862d-3e86-4e7d-b8b2-49fa2c1e7b13" />
+<img width="1915" height="658" alt="FFSO is deployed properly" src="https://github.com/user-attachments/assets/65165fd2-412b-4d8f-9616-f0e9df3cadcc" />
+
+E-Summary
+
+I successfully deployed Fortinet FSSO in my homelab by installing both the DC Agent and the Collector Agent on my Windows Server domain controller. 
+I configured the Collector Agent to monitor login events and allowed FortiGate to communicate with it by opening TCP port 8000 on the server firewall.
+After linking FortiGate to the Collector Agent, the firewall immediately detected my Active Directory users and groups. 
+This setup now allows me to apply identity based firewall rules and monitor user activity in real time, which accurately reflects how enterprises control access and enforce security policies.
+
 
 ## 8-Deploying  High Availability Cluster (Active Passive)
 
@@ -582,6 +701,88 @@ Both FortiGates now behave as a single unified firewall.
 Any configuration change on the primary automatically syncs to the secondary. The cluster will fail over smoothly if the primary becomes unavailable.
 <img width="1915" height="661" alt="HA cluster ( Primary)" src="https://github.com/user-attachments/assets/b1b51e41-5a27-4205-8f92-48d9be132d89" />
 <img width="1668" height="567" alt="secondary FGT" src="https://github.com/user-attachments/assets/7ba4d6b6-ff72-463b-bd7b-a86138cd5cea" />
+
+
+## Deploying Ubuntu Server for GLPI, Zabbix and Wazuh
+
+In this stage of my homelab, I deployed an Ubuntu Server virtual machine and transformed it into a central platform for three major enterprise tools that support IT operations, monitoring, and security.
+My goal was to recreate what real companies use for asset management, helpdesk services, network monitoring, and security visibility. I installed GLPI, Zabbix, and Wazuh on the same server, 
+and I followed the same structured installation approach for each tool.
+
+1. Deploying the Ubuntu Server
+
+I began by installing Ubuntu Server and checking its network configuration using the ip a command. 
+The machine received the address 192.168.72.54, which allowed me to access it through SSH from my workstation.
+
+To work more comfortably, I connected to the server through SecureCRT. 
+This gave me a stable terminal where I could edit configuration files, follow installation guides, and manage packages with ease.
+<img width="1480" height="836" alt="I deploy my Ubuntu server ( Zabbix and GLPI)" src="https://github.com/user-attachments/assets/40ae7bbd-595a-435c-8f66-195d613feb23" />
+<img width="1152" height="1015" alt="I use SecureCRT to ssh my ubuntu server  I am installed GLPI" src="https://github.com/user-attachments/assets/80c5f570-ec30-46f0-afc7-5ca1d8734038" />
+
+2. Installing GLPI
+
+What GLPI is and why it matters
+
+GLPI is an IT asset management and helpdesk system. It helps organizations track their devices, software, users, and infrastructure.
+At the same time, it provides a full ticketing platform that allows support teams to manage incidents and service requests.
+It is an important tool because it centralizes both inventory and helpdesk operations in one place.
+
+How I installed GLPI ?
+
+I prepared the server by configuring MariaDB, creating the glpidb database, and adding a dedicated user with the correct privileges.
+I downloaded the GLPI package from GitHub and extracted it into the Apache web directory, then created the necessary Apache configuration file so the service would load correctly.
+
+After restarting Apache, I accessed the GLPI installer through my browser at http://192.168.72.54/glpi
+The installation page opened without issues. After completing the setup, I logged into the GLPI dashboard and confirmed that everything was working properly.
+
+<img width="1919" height="1032" alt="I access GLPI DASHBOARD" src="https://github.com/user-attachments/assets/e9017ee9-8ed7-4dc9-a9e6-19cf01ca393f" />
+<img width="1917" height="925" alt="GLPI dashboard" src="https://github.com/user-attachments/assets/8f9b8686-d7ce-43c8-9359-3d775394e572" />
+
+3. Installing Zabbix
+
+What Zabbix is and why it matters
+
+Zabbix is an open source monitoring system used to observe servers, network devices, applications, and services in real time.
+It helps detect problems early, prevents downtime, and improves visibility across an environment. 
+It is a core tool in both SOC and NOC operations because it provides live monitoring, alerts, and performance data.
+
+How I installed Zabbix ?
+
+I installed the Zabbix server, the frontend, and the agent packages. I created a dedicated zabbix database in MariaDB, granted the correct permissions, and imported the initial schema.
+After editing the Zabbix configuration file with the right database credentials, I enabled and started all the services.
+
+Once everything was ready, I opened http://192.168.72.54/zabbix
+ in my browser and logged into the dashboard. The interface showed that the Zabbix server was running and ready for monitoring.
+ 
+ <img width="1918" height="1030" alt="I am installing Zabbix " src="https://github.com/user-attachments/assets/0e2fdc77-901b-46e1-b095-224860e1c3c2" />
+ <img width="1919" height="1034" alt="Accessing Zabbix" src="https://github.com/user-attachments/assets/284af41e-79ac-4380-b901-67e2640ba126" />
+ <img width="1914" height="924" alt="Zabbix dashboard" src="https://github.com/user-attachments/assets/4d365e89-5b18-4e3b-8de2-d9ef4aefc7c3" />
+
+ 4. Installing Wazuh
+
+I installed Wazuh on the same server using the same SecureCRT workflow. Wazuh is an open source security platform that focuses on detection, monitoring, and response. 
+It includes intrusion detection, log analysis, file integrity monitoring, vulnerability detection, and compliance checks.
+It is an essential tool in modern SOC environments because it gives deep visibility into security events and endpoint activity.
+The installation script handled most of the configuration. When it finished, I accessed the Wazuh dashboard through the web interface and verified that the service was running correctly.
+
+<img width="960" height="1032" alt="Wazuh is installed" src="https://github.com/user-attachments/assets/51c07a3a-dfbf-4ee9-a8a9-c08854688d38" />
+<img width="958" height="920" alt="access Wazuh dashboard" src="https://github.com/user-attachments/assets/1696190c-8266-425b-9de8-622f9d5d644a" />
+<img width="1919" height="921" alt="Wazuh Dashboard" src="https://github.com/user-attachments/assets/2887351b-928b-4cb3-902d-c60d79080584" />
+
+5. Summary of the Work Completed
+
+I deployed an Ubuntu Server and installed three major enterprise level tools: GLPI for asset management and helpdesk operations, Zabbix for real time monitoring, 
+and Wazuh for security visibility and threat detection. I used SecureCRT throughout the process to manage the server through SSH, which made the installation smooth and efficient.
+
+Each tool installed successfully, and I confirmed this by accessing the GLPI dashboard, the Zabbix dashboard, and the Wazuh dashboard.
+Together, these systems now form a strong IT and security operations environment inside my homelab. They replicate the same tools used in real organizations and allow me to practice managing, monitoring, and securing a complete enterprise style infrastructure.
+
+
+
+
+
+
+
 
 
 
