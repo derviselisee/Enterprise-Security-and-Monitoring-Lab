@@ -33,7 +33,6 @@ It allows me to simulate how enterprises track devices, manage tickets, and moni
 It collects logs from every machine, analyzes activity, and alerts on suspicious events. 
 It helps me practice SOC tasks such as threat detection, alert triage, and incident response.
 
-
 -Ubuntu (Client Machine)
 
 I use this Ubuntu desktop VM as an additional client workstation. 
@@ -121,54 +120,53 @@ Threat Simulation and Detection
 
 -Operating Systems 💻
 
-Windows Server 2022 (Primary Domain Controller/Identity)
+• Windows Server 2022 (Primary Domain Controller/Identity)
 
-Windows 10 (Domain Client)
+• Windows 10 (Domain Client)
 
-Ubuntu Desktop (Linux Client)
+• Ubuntu Desktop (Linux Client)
 
-Ubuntu Server (Monitoring/SIEM Host)
+• Ubuntu Server (Monitoring/SIEM Host)
 
 -Security and Monitoring 🛡️
 
-Wazuh SIEM: Security monitoring, log collection, and threat detection.
+• Wazuh SIEM: Security monitoring, log collection, and threat detection.
 
-Zabbix: Performance monitoring, resource usage tracking, and alerting.
+• Zabbix: Performance monitoring, resource usage tracking, and alerting.
 
-GLPI: IT asset management, documentation, and helpdesk ticketing.
+• GLPI: IT asset management, documentation, and helpdesk ticketing.
 
-Kali Linux: Attack simulation and security validation testing.
+• Kali Linux: Attack simulation and security validation testing.
 
-FortiView & Log Analysis Tools: Real-time visualization and interpretation of security logs.
+• FortiView & Log Analysis Tools: Real-time visualization and interpretation of security logs.
 
 -Networking and Security Protocols 🌐
 
-FortiGate Firewall (VM): Central security enforcement, routing, segmentation, and inspection.
+• FortiGate Firewall (VM): Central security enforcement, routing, segmentation, and inspection.
 
-LDAP: Integration for user authentication against Active Directory.
+• LDAP: Integration for user authentication against Active Directory.
 
-FSSO (Fortinet Single Sign On): Automatic identity mapping for user-based policies.
+• FSSO (Fortinet Single Sign On): Automatic identity mapping for user-based policies.
 
-SNMP & Syslog: Protocols for forwarding performance metrics and security logs, respectively.
+• SNMP & Syslog: Protocols for forwarding performance metrics and security logs, respectively.
 
-OSPF: Routing protocol enabling automatic subnet exchange between firewalls.
+• OSPF: Routing protocol enabling automatic subnet exchange between firewalls.
 
-IPsec VPN: Used for the site-to-site tunnel connecting the hybrid environment.
+• IPsec VPN: Used for the site-to-site tunnel connecting the hybrid environment.
 
 -Cloud and Virtualization ☁️
 
-Microsoft Azure: Hosts the cloud portion of the lab (FortiGate VM and client).
+• Microsoft Azure: Hosts the cloud portion of the lab (FortiGate VM and client).
 
-Azure Bastion: Provides secure remote access to cloud resources without exposing RDP.
+• Azure Bastion: Provides secure remote access to cloud resources without exposing RDP.
 
-VMware Workstation: The core virtualization platform used to host the entire on-premises lab.
+• VMware Workstation: The core virtualization platform used to host the entire on-premises lab.
 
 -Administration Tools ⚙️
 
-SecureCRT: Client used for remote command-line management.
+• SecureCRT: Client used for remote command-line management.
 
-SSH (Secure Shell): Protocol used for secure remote administration of Linux hosts.
-
+• SSH (Secure Shell): Protocol used for secure remote administration of Linux hosts.
 
 ## PURPOSE OF THIS PROJECT
 
