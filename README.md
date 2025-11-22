@@ -25,16 +25,14 @@ I use it to test domain logins, Group Policy behavior, endpoint monitoring, and 
 This VM acts as a vulnerable legacy workstation. I use it to simulate outdated systems, test exploit behavior, and generate risky activity.
 It allows me to observe how my monitoring and SIEM tools respond to real threats.
 
--Debian (Wazuh SIEM Server)
-
-This Debian server runs Wazuh, which acts as the central SIEM and endpoint security platform. 
-It collects logs from every machine, analyzes activity, and alerts on suspicious events. 
-It helps me practice SOC tasks such as threat detection, alert triage, and incident response.
-
--Ubuntu Server (GLPI and Zabbix)
+-Ubuntu Server (GLPI, Zabbix and Wazuh )
 
 This Ubuntu Server hosts GLPI for IT asset management and helpdesk operations, and Zabbix for infrastructure monitoring. 
 It allows me to simulate how enterprises track devices, manage tickets, and monitor system performance and availability.
+ This server also  runs Wazuh, which acts as the central SIEM and endpoint security platform. 
+It collects logs from every machine, analyzes activity, and alerts on suspicious events. 
+It helps me practice SOC tasks such as threat detection, alert triage, and incident response.
+
 
 -Ubuntu (Client Machine)
 
@@ -121,33 +119,56 @@ Threat Simulation and Detection
 
 ## TOOLS AND TECHNOLOGIES USED
 
-• Windows Server 2019
+-Operating Systems 💻
 
-• Windows 10
+Windows Server 2022 (Primary Domain Controller/Identity)
 
-• Ubuntu Desktop
+Windows 10 (Domain Client)
 
-• Debian Server
+Ubuntu Desktop (Linux Client)
 
-• FortiGate Firewall, SD WAN, High Availability
+Ubuntu Server (Monitoring/SIEM Host)
 
-• Wazuh SIEM
+-Security and Monitoring 🛡️
 
-• Zabbix Monitoring
+Wazuh SIEM: Security monitoring, log collection, and threat detection.
 
-• GLPI IT asset and ticket management
+Zabbix: Performance monitoring, resource usage tracking, and alerting.
 
-• LDAP
+GLPI: IT asset management, documentation, and helpdesk ticketing.
 
-• FSSO
+Kali Linux: Attack simulation and security validation testing.
 
-• Kali Linux
+FortiView & Log Analysis Tools: Real-time visualization and interpretation of security logs.
 
-• VMware Workstation
+-Networking and Security Protocols 🌐
 
-• Syslog and SNMP
+FortiGate Firewall (VM): Central security enforcement, routing, segmentation, and inspection.
 
-• FortiView and log analysis tools
+LDAP: Integration for user authentication against Active Directory.
+
+FSSO (Fortinet Single Sign On): Automatic identity mapping for user-based policies.
+
+SNMP & Syslog: Protocols for forwarding performance metrics and security logs, respectively.
+
+OSPF: Routing protocol enabling automatic subnet exchange between firewalls.
+
+IPsec VPN: Used for the site-to-site tunnel connecting the hybrid environment.
+
+-Cloud and Virtualization ☁️
+
+Microsoft Azure: Hosts the cloud portion of the lab (FortiGate VM and client).
+
+Azure Bastion: Provides secure remote access to cloud resources without exposing RDP.
+
+VMware Workstation: The core virtualization platform used to host the entire on-premises lab.
+
+-Administration Tools ⚙️
+
+SecureCRT: Client used for remote command-line management.
+
+SSH (Secure Shell): Protocol used for secure remote administration of Linux hosts.
+
 
 ## PURPOSE OF THIS PROJECT
 
