@@ -61,6 +61,39 @@ The objective is to build and operate a multi platform environment where Windows
 
 ## IMPLEMENTATION SUMMARY
 
+   Core Infrastructure
+
+• Deployed Windows Server 2022 as the Active Directory domain controller for DNS, DHCP, and centralized identity services.
+• Joined a Windows 10 workstation to the domain and added an Ubuntu Desktop as a Linux client for cross platform testing.
+• Configured LDAP and FSSO so the FortiGate can authenticate users and enforce identity based firewall policies.
+
+  FortiGate Security, SD WAN, and HA
+
+• Deployed two FortiGate firewalls in VMware to create a high availability pair.
+• Configured SD WAN with one bridged WAN link and one NAT based WAN link for path selection and link quality monitoring.
+• Integrated the FortiGate cluster with Active Directory using LDAP and FSSO for real time identity based control.
+• Built internal segmentation and monitored all user activity through FortiView and firewall logs.
+
+   Security Monitoring and IT Management
+
+• Installed a Wazuh server on Ubuntu for centralized SIEM, log analysis, and security event correlation.
+• Deployed Zabbix to monitor servers, network devices, and performance metrics using SNMP and Zabbix Agents.
+• Installed GLPI to manage inventory, documentation, and helpdesk workflows within the environment.
+
+   Azure Hybrid Cloud Integration
+
+• Deployed a FortiGate VM in Microsoft Azure alongside a Windows client in the same virtual network.
+• Configured a custom route table so the Azure Windows VM routes all outbound traffic through the Azure FortiGate for inspection.
+• Built a site to site IPsec VPN between the on premises FortiGate and the Azure FortiGate to unify both environments.
+• Enabled OSPF across the tunnel to automatically exchange subnets and maintain synchronized routing.
+• Used Azure Bastion for secure, clientless remote access to the cloud VM without exposing RDP to the internet.
+
+   Threat Simulation and Detection
+
+• Used Kali Linux to simulate port scans, brute force attempts, enumeration, and other adversarial techniques.
+• Verified detections through Wazuh alerts, FortiGate security logs, Windows event logs, and Zabbix performance spikes.
+• Confirmed full event correlation, identity mapping, and incident triage across the entire hybrid environment.
+
 Core Infrastructure
 
 • Deployed a Windows Server as the Active Directory domain controller providing DNS, DHCP, and user management.
