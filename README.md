@@ -27,12 +27,11 @@ It allows me to observe how my monitoring and SIEM tools respond to real threats
 
 -Ubuntu Server (GLPI, Zabbix and Wazuh )
 
-This Ubuntu Server hosts GLPI for IT asset management and helpdesk operations, and Zabbix for infrastructure monitoring. 
-It allows me to simulate how enterprises track devices, manage tickets, and monitor system performance and availability.
+This Ubuntu Server hosts GLPI for asset management and helpdesk operations, and it also runs Zabbix to monitor system performance.
+Because of that, I can simulate how real organizations track devices, manage tickets, and keep visibility over their infrastructure.
 
-This server also  runs Wazuh, which acts as the central SIEM and endpoint security platform. 
-It collects logs from every machine, analyzes activity, and alerts on suspicious events. 
-It helps me practice SOC tasks such as threat detection, alert triage, and incident response.
+The server also runs Wazuh as my SIEM platform. It collects logs from all machines, analyzes activity, and alerts me about suspicious events.
+This helps me practice core SOC skills such as threat detection and incident response.
 
 -Ubuntu (Client Machine)
 
@@ -57,7 +56,8 @@ It helps me test redundancy, failover behavior, heartbeat communication, and con
 
 ## MISSION CONTEXT
 This project recreates a realistic enterprise network designed to integrate identity services, firewall security, SD WAN connectivity, high availability, endpoint monitoring, and threat detection into one unified ecosystem. 
-The objective is to build and operate a multi platform environment where Windows and Linux clients authenticate through centralized identity infrastructure, security events are collected and analyzed through SIEM and monitoring tools, and FortiGate firewalls enforce segmentation and protect network traffic. This lab mirrors how modern SOC and network engineering teams collaborate to manage authentication, system performance, monitoring workflows, and incident detection across a fully functional enterprise environment.
+The objective is to build and operate a multi platform environment where Windows and Linux clients authenticate through centralized identity infrastructure, security events are collected and analyzed through SIEM and monitoring tools, and FortiGate firewalls enforce segmentation and protect network traffic. 
+This lab mirrors how modern SOC and network engineering teams collaborate to manage authentication, system performance, monitoring workflows, and incident detection across a fully functional enterprise environment.
 
 ## IMPLEMENTATION SUMMARY
 
