@@ -574,7 +574,6 @@ It also sends group membership information so that the firewall can apply identi
 This component is essential because it acts as the link between the domain controller and the FortiGate.
 
 <img width="1560" height="957" alt="dc agent installation" src="https://github.com/user-attachments/assets/7862dcbe-0c4e-447e-b632-3e66ff285c14" />
-<img width="1551" height="954" alt="FSSO setup installation" src="https://github.com/user-attachments/assets/b61e11e1-da68-4162-87aa-377baf56d59a" />
 <img width="1555" height="953" alt="fsso SETUP" src="https://github.com/user-attachments/assets/25f1578a-7755-44dc-9eac-ec9be0c1c096" />
 
 
@@ -603,8 +602,8 @@ Because FSSO provides group membership details directly from Active Directory, F
 This integration now allows my firewall to build policies based on real user identities. The system can apply rules according to the person who is logged in rather than relying only on IP addresses or network segments.
 This mirrors how modern enterprise networks enforce access control.
 
+
 <img width="1915" height="658" alt="FFSO is deployed properly" src="https://github.com/user-attachments/assets/d7ac862d-3e86-4e7d-b8b2-49fa2c1e7b13" />
-<img width="1915" height="658" alt="FFSO is deployed properly" src="https://github.com/user-attachments/assets/65165fd2-412b-4d8f-9616-f0e9df3cadcc" />
 
 E-Summary
 
