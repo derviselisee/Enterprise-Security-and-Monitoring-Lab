@@ -819,6 +819,15 @@ Together, these systems now form a strong IT and security operations environment
 They replicate the same tools used in real organizations and allow me to practice managing, monitoring, and securing a complete enterprise style infrastructure.
 
 
+As the next phase of this project, the architecture will be extended into a true hybrid infrastructure hosted in Microsoft Azure. In this phase, 
+a FortiGate firewall will be deployed as a virtual machine alongside a Windows client virtual machine to represent cloud based workloads.
+
+The on premises environment and the Azure environment will then be securely interconnected through a site to site IPsec VPN, while OSPF dynamic routing will be enabled on both sides to allow automatic exchange of network routes. 
+
+This design ensures seamless connectivity, centralized security inspection, and consistent routing behavior across on premises and cloud networks, 
+therefore completing the hybrid enterprise architecture envisioned for this project.
+
+
 
 
 
