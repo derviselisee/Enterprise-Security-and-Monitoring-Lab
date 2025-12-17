@@ -4,9 +4,9 @@
 
 ## Lab Setup Overview
 
-My homelab is designed to mirror how a real company organizes its network, security tools, and authentication systems. 
-Each virtual machine has a specific role that helps me practice enterprise concepts such as identity management, monitoring, threat detection, and firewall security. 
-This setup allows me to build realistic SOC and IT workflows inside a fully controlled environment.
+My project is designed to mirror how a real company organizes its network, security tools, and authentication systems. 
+Each virtual machine serves a clearly defined role that allows me to practice enterprise concepts such as identity management, monitoring, threat detection, and firewall security.
+Because of this structured design, the environment enables me to build and validate realistic SOC and IT operational workflows within a fully controlled setting.
 
 <img width="363" height="428" alt="Lab setup" src="https://github.com/user-attachments/assets/f217f72c-b8c1-45ca-a2af-1bc3620e113f" />
 
