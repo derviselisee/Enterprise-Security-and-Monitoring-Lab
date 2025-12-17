@@ -175,18 +175,6 @@ This lab mirrors how modern SOC and network engineering teams collaborate to man
 The purpose of this project is to design and operate a fully integrated enterprise style network where identity management, firewall security, monitoring, and threat detection work together as a unified system. 
 This lab allows me to practice real world workflows by centralizing authentication through Active Directory, enforcing security controls with FortiGate firewalls, and using SIEM and monitoring tools to track system health and detect malicious activity. The project provides a hands on environment that simulates how modern organizations secure their networks, monitor critical assets, and respond to incidents across diverse platforms.
 
-## For Resume
-Enterprise Security and Monitoring Lab — Resume Bullet Points
-
-• Designed and deployed a full enterprise grade environment with Active Directory, Windows and Linux endpoints, LDAP authentication, 
-and identity based controls that provided end to end visibility across users, devices, and network activity.
-
-• Implemented FortiGate firewalls in VMware with SD WAN and Active Passive HA, configured dual ISP paths, segmented internal networks, a
-nd enforced identity based security policies while monitoring real time traffic and events through FortiView and system logs.
-
-• Built a complete SOC style monitoring stack by deploying Wazuh SIEM on Debian for log analysis and alerting, installing Zabbix and GLPI on Ubuntu Server for infrastructure monitoring and asset management,
-and generating controlled attacks from Kali Linux to validate detection and response capabilities.
-
 ## FortiGate Network Setup
 
 <img width="996" height="848" alt="MY-FORTIGATE interfaces" src="https://github.com/user-attachments/assets/78eff0c5-f420-40ef-85d6-c2aa80a4d4ad" />
