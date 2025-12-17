@@ -818,6 +818,7 @@ Each tool installed successfully, and I confirmed this by accessing the GLPI das
 Together, these systems now form a strong IT and security operations environment inside my homelab.
 They replicate the same tools used in real organizations and allow me to practice managing, monitoring, and securing a complete enterprise style infrastructure.
 
+## PART 2
 
 As the next phase of this project, the architecture will be extended into a true hybrid infrastructure hosted in Microsoft Azure. In this phase, 
 a FortiGate firewall will be deployed as a virtual machine alongside a Windows client virtual machine to represent cloud based workloads.
