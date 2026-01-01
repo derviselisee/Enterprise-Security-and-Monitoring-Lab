@@ -1,6 +1,6 @@
 ## ENTERPRISE SECURITY AND MONITORING LAB 
 
-#Enterprise Security and Monitoring Lab with AD, LDAP, Wazuh, Zabbix, GLPI, and Kali Linux
+## Enterprise Security and Monitoring Lab with AD, LDAP, Wazuh, Zabbix, GLPI, and Kali Linux
 
 ## Lab Setup Overview
 
