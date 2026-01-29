@@ -1,3 +1,95 @@
+# ENTERPRISE SECURITY AND MONITORING LAB
+
+Enterprise Security and Monitoring Lab with Active Directory, LDAP, Wazuh, Zabbix, GLPI, Kali Linux, and FortiGate HA.
+
+This project mirrors how an enterprise organizes identity, monitoring, and security operations in a controlled lab environment. Because every system has a defined role, the lab supports realistic SOC workflows, IT operations, and security validation.
+
+---
+
+## 1. Mission Context
+This lab recreates a realistic enterprise network where identity services, firewall security, SD WAN connectivity, high availability, endpoint monitoring, and threat detection operate as one unified ecosystem.
+
+- [Open Mission Context](./1-mission-context/mission-context.md)
+
+---
+
+## 2. Lab Setup Overview
+A multi platform environment where each VM represents a real enterprise role.
+
+- [Open Lab Setup Overview](./2-lab-setup-overview/topology.md)
+- [Open VM Inventory and Roles](./2-lab-setup-overview/vm-inventory.md)
+- [Open Network Segmentation Plan](./2-lab-setup-overview/network-segmentation.md)
+
+---
+
+## 3. Implementation Summary
+Structured build phases that reflect real enterprise deployment.
+
+- [Core Infrastructure](./3-implementation-summary/core-infrastructure.md)
+- [FortiGate Security, SD WAN, and HA](./3-implementation-summary/fortigate-security-sdwan-ha.md)
+- [Security Monitoring and IT Management](./3-implementation-summary/monitoring-it-ops.md)
+- [Azure Hybrid Cloud Integration](./3-implementation-summary/azure-hybrid-integration.md)
+- [Threat Simulation and Detection](./3-implementation-summary/threat-simulation-detection.md)
+
+---
+
+## 4. FortiGate Build Notes
+Step by step firewall and SD WAN configuration.
+
+- [Network Setup](./4-fortigate-build-notes/1-network-setup.md)
+- [Interface, WAN, and LAN Configuration](./4-fortigate-build-notes/2-interface-wan-lan.md)
+- [SD WAN and Performance SLA Monitoring](./4-fortigate-build-notes/3-sdwan-performance-sla.md)
+- [Firewall Policies](./4-fortigate-build-notes/4-firewall-policies.md)
+- [Connectivity Validation Tests](./4-fortigate-build-notes/5-connectivity-tests.md)
+
+---
+
+## 5. Identity and Access Management
+Centralized authentication, identity mapping, and user based firewall control.
+
+- [Active Directory Build](./5-identity-access-management/1-active-directory-build.md)
+- [Windows 10 Domain Join Validation](./5-identity-access-management/2-domain-join-windows10.md)
+- [LDAP Authentication With FortiGate](./5-identity-access-management/3-ldap-fortigate-integration.md)
+- [Fortinet FSSO Deployment](./5-identity-access-management/4-fsso-deployment.md)
+
+---
+
+## 6. High Availability
+Active Passive FortiGate HA cluster with heartbeat and monitored interfaces.
+
+- [Open HA Active Passive Build](./6-high-availability/ha-active-passive.md)
+
+---
+
+## 7. Monitoring, SIEM, and ITSM
+Operational visibility, ticketing workflows, and security detection.
+
+- [GLPI Deployment](./7-monitoring-siem-itsm/glpi-deployment.md)
+- [Zabbix Deployment](./7-monitoring-siem-itsm/zabbix-deployment.md)
+- [Wazuh Deployment](./7-monitoring-siem-itsm/wazuh-deployment.md)
+
+---
+
+## 8. Skills Demonstrated
+What this lab proves in real enterprise terms.
+
+- [Open Skills Demonstrated](./8-skills-demonstrated/skills.md)
+
+---
+
+## 9. Tools and Technologies Used
+Operating systems, platforms, and protocols used in this environment.
+
+- [Open Tools and Technologies](./9-tools-and-technologies/tools.md)
+
+---
+
+## 10. Screenshots and Diagrams
+Evidence and visuals for validation and documentation.
+
+- [Open Screenshots and Diagrams](./10-screenshots-and-diagrams/)
+
+
 ## ENTERPRISE SECURITY AND MONITORING LAB 
 
 ## Enterprise Security and Monitoring Lab with AD, LDAP, Wazuh, Zabbix, GLPI, and Kali Linux
