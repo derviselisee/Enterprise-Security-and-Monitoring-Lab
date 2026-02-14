@@ -14,7 +14,7 @@ Because of this structured design, the environment enables me to build and valid
 
 -Windows Server 2022
 
-This machine serves as my domain controller. It manages Active Directory, DNS, user accounts, groups, and authentication across the network. 
+This machine serves as my domain controller. It manages Active Directory, DNS, user accounts, groups, and authentication across the network.
 It is the backbone of identity based security in my homelab and supports LDAP and future integrations such as FSSO.
 
 -Windows 10
