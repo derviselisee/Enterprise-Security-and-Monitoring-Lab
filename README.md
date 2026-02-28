@@ -58,9 +58,16 @@ It helps me test redundancy, failover behavior, heartbeat communication, and con
 
 
 ## MISSION CONTEXT
+This project recreates a realistic enterprise network designed to integrate identity services, firewall security, SD WAN connectivity,
+high availability, endpoint monitoring, and threat detection into one unified ecosystem.
+
+The objective is to build and operate a multi platform environment where Windows and Linux clients authenticate through a centralized identity infrastructure,
+security events are collected and analyzed through a SIEM and monitoring stack, and FortiGate firewalls enforce network segmentation and protect traffic across internal and external boundaries.
+
+This lab mirrors how modern SOC teams and network engineering teams collaborate to manage authentication controls, system performance, monitoring workflows, and incident detection across a fully functional enterprise environment.
+In addition, the architecture is designed to reflect major compliance frameworks such as ISO 27001, GDPR, and SOX, by enforcing role based access control, maintaining centralized audit logging, protecting data in transit through encryption, and supporting structured incident response procedures, all of which are essential for secure and compliant enterprise operations.
 This project recreates a realistic enterprise network designed to integrate identity services, firewall security, SD WAN connectivity, high availability, endpoint monitoring, and threat detection into one unified ecosystem. 
-The objective is to build and operate a multi platform environment where Windows and Linux clients authenticate through centralized identity infrastructure, security events are collected and analyzed through SIEM and monitoring tools, and FortiGate firewalls enforce segmentation and protect network traffic. 
-This lab mirrors how modern SOC and network engineering teams collaborate to manage authentication, system performance, monitoring workflows, and incident detection across a fully functional enterprise environment.
+
 
 ## IMPLEMENTATION SUMMARY
 
