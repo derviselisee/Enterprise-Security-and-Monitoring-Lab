@@ -1,8 +1,9 @@
 # ENTERPRISE SECURITY AND MONITORING LAB
 
-Enterprise Security and Monitoring Lab with Active Directory, LDAP, FortiGate, Wazuh, Zabbix, GLPI, and Kali Linux
+# Enterprise Security and Monitoring Lab with Active Directory, LDAP, FortiGate, Wazuh, Zabbix, GLPI, and Kali Linux
 ---
-My project is designed to mirror how a real company organizes its network, security tools, and authentication systems. Each virtual machine serves a clearly defined role that allows me to practice enterprise concepts such as identity management, monitoring, threat detection, and firewall security. Because of this structured design, the environment enables me to build and validate realistic SOC and IT operational workflows within a fully controlled setting.
+My project is designed to mirror how a real company organizes its network, security tools, and authentication systems.
+Each virtual machine serves a clearly defined role that allows me to practice enterprise concepts such as identity management, monitoring, threat detection, and firewall security. Because of this structured design, the environment enables me to build and validate realistic SOC and IT operational workflows within a fully controlled setting.
 
 <br>
 
@@ -23,7 +24,6 @@ My project is designed to mirror how a real company organizes its network, secur
 | Module 9 | [Azure Hybrid Cloud Integration (Upcoming)](#module-9-azure-hybrid-cloud-integration) |
 | Module 10 | [Threat Simulation and Detection](#module-10-threat-simulation-and-detection) |
 | Module 11 | [Compliance Considerations](#module-11-compliance-considerations) |
-
 
 ---
 
