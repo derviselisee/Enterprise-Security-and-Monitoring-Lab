@@ -9,7 +9,7 @@ My project is designed to mirror how a real company organizes its network, secur
 
 | No | Name |
 |----|------|
-| Module 1 | [Lab Architecture and Infrastructure](#module-1-lab-architecture-and-infrastructure) |
+| Module 1 | [Lab Overview & Architecture](#module-1-lab-architecture-and-infrastructure) |
 | Module 2 | [FortiGate Network Setup ](#module-2-fortigate-network-deployment) |
 | Module 3 | [SD WAN Configuration](#module-3-sd-wan-configuration) |
 | Module 4 | [Firewall Policy Configuration](#module-4-firewall-policy-configuration) |
@@ -21,53 +21,37 @@ My project is designed to mirror how a real company organizes its network, secur
 | Module 10 | [Threat Simulation and Detection](#module-10-fortigate-high-availability-cluster) |
 | Module 11 | [Compliance Considerations](#module-11-monitoring-platform-deployment) |
 
+## Module 1 - Lab Overview & Architecture
 
+Mission Context
+This project recreates a realistic enterprise network designed to integrate identity services, firewall security, SD-WAN connectivity, high availability, endpoint monitoring, and threat detection into one unified ecosystem.
+The objective is to build and operate a multi-platform environment where:
 
-### LAB OVERVIEW
-<img width="363" height="428" alt="Lab setup" src="https://github.com/user-attachments/assets/f217f72c-b8c1-45ca-a2af-1bc3620e113f" />
+Windows and Linux clients authenticate through a centralized identity infrastructure
+Security events are collected and analyzed through a SIEM and monitoring stack
+FortiGate firewalls enforce network segmentation and protect traffic across internal and external boundaries
 
--Windows Server 2022
+This lab mirrors how modern SOC teams and network engineering teams collaborate to manage authentication controls, system performance, monitoring workflows, and incident detection across a fully functional enterprise environment.
+Virtual Machines & Roles
+VMRoleWindows Server 2022Domain Controller — Active Directory, DNS, DHCP, LDAP, FSSOWindows 10Employee workstation — domain logins, Group Policy, endpoint monitoringWindows 7Legacy/vulnerable workstation — exploit simulation, SIEM testingUbuntu ServerHosts GLPI (helpdesk), Zabbix (monitoring), and Wazuh (SIEM)Ubuntu DesktopLinux client — cross-platform auth, log collection, agent deploymentKali LinuxAttacker machine — scans, brute force, exploit simulationFGT HQ (Primary FortiGate)Main firewall — routing, NAT, security profiles, identity-based policiesFGT HQ2 (Secondary FortiGate)HA pair — Active-Passive cluster, failover, config sync
+Skills Demonstrated
 
-This machine serves as my domain controller. It manages Active Directory, DNS, user accounts, groups, and authentication across the network.
-It is the backbone of identity based security in my homelab and supports LDAP and future integrations such as FSSO.
+Windows Server administration: AD design, OU structuring, DNS/DHCP, domain workstation management
+FortiGate engineering: SD-WAN, HA, routing, segmentation, NAT, LDAP/FSSO identity enforcement
+Linux system administration: Ubuntu Server and Desktop, SSH management, service integration
+SIEM operations with Wazuh: agent deployment, log ingestion, rule-based alerting, event correlation
+Performance monitoring with Zabbix: SNMP and Zabbix Agents, device and network health
+IT operations with GLPI: inventory tracking, helpdesk ticketing, documentation workflows
+Identity integration: LDAP + FSSO for real-time user mapping and policy enforcement
+Threat simulation: Kali Linux scanning, enumeration, and intrusion attempts validated through SIEM and firewall logs
+Enterprise troubleshooting: multi-layer debugging across networking, firewalls, Windows, Linux, and hybrid cloud
 
--Windows 10
-
-My Windows 10 virtual machine represents a standard employee workstation.
-I use it to test domain logins, Group Policy behavior, endpoint monitoring, and normal user activity inside a corporate network.
-
--Windows 7
-
-This VM acts as a vulnerable legacy workstation. I use it to simulate outdated systems, test exploit behavior, and generate risky activity.
-It allows me to observe how my monitoring and SIEM tools respond to real threats.
-
--Ubuntu Server (GLPI, Zabbix and Wazuh )
-
-This Ubuntu Server hosts GLPI for asset management and helpdesk operations, and it also runs Zabbix to monitor system performance.
-Because of that, I can simulate how real organizations track devices, manage tickets, and keep visibility over their infrastructure.
-
-The server also runs Wazuh as my SIEM platform. It collects logs from all machines, analyzes activity, and alerts me about suspicious events.
-This helps me practice core SOC skills such as threat detection and incident response.
-
--Ubuntu (Client Machine)
-
-I use this Ubuntu desktop VM as an additional client workstation. 
-It helps me test cross platform authentication, log collection, agent deployment, and monitoring from a Linux endpoint.
-
--Kali Linux
-
-Kali is my attacker machine. I use it to generate controlled attacks such as scans, brute force attempts, and exploit activity, 
-allowing me to observe how my SIEM, firewall, and monitoring tools detect and respond to real threats.
-
--FGT HQ (Primary FortiGate)
-
-This is the main FortiGate firewall that secures the entire lab. It handles routing, NAT, security profiles, identity based policies, and traffic inspection. 
-It represents the core enterprise firewall in my environment.
-
--FGT HQ2 (Secondary FortiGate for HA)
-
-This FortiGate is dedicated to High Availability testing. I pair it with the primary firewall to build an Active Passive HA cluster.
-It helps me test redundancy, failover behavior, heartbeat communication, and configuration synchronization.
+Tools & Technologies
+Operating Systems: Windows Server 2022, Windows 10, Ubuntu Desktop, Ubuntu Server, Kali Linux
+Security & Monitoring: Wazuh SIEM, Zabbix, GLPI, FortiView & Log Analysis Tools
+Networking & Protocols: FortiGate Firewall (VM), LDAP, FSSO, SNMP, Syslog, OSPF, IPsec VPN
+Cloud & Virtualization: Microsoft Azure, Azure Bastion, VMware Workstation
+Administration: SecureCRT, SSH
 
 
 [Back to Top](#top)
