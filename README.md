@@ -832,9 +832,6 @@ Through Active Directory, LDAP, and identity based firewall enforcement, the env
 Encrypted site to site IPsec VPN connections protect data in transit, while centralized logging through Wazuh SIEM provides traceability and accountability.
 These controls align with ISO 27001 requirements for access control, cryptography, monitoring, and incident management.
 
-At the same time, the setup strengthens regulatory compliance by ensuring auditability and data protection. GDPR principles are supported through access tracking, log retention, and breach detection capabilities. 
-SOX financial integrity controls are reinforced by strict network segmentation, monitored authentication events, and documented system activity. 
-Because the environment integrates monitoring, reporting, identity governance, and tested incident response procedures, it demonstrates a structured and measurable security posture aligned with modern governance and compliance standards.
 
 
 
