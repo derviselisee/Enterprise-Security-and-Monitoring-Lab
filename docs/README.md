@@ -24,3 +24,49 @@ This project recreates a realistic enterprise infrastructure where identity serv
 | Module 12 | [Threat Simulation and Detection](#module-12-threat-simulation-and-detection) |
 | Module 13 | [Hybrid Cloud Expansion](#module-13-hybrid-cloud-expansion) |
 
+
+### Lab Overview
+
+This environment mirrors how enterprises design secure infrastructures by integrating identity services, monitoring tools, and firewall security into a structured network.
+
+### Infrastructure Components
+
+**Windows Server 2022**
+
+Domain controller responsible for:
+
+- Active Directory  
+- DNS  
+- User authentication  
+- LDAP integration  
+
+**Windows 10**
+
+Represents a standard employee workstation used for:
+
+- Domain authentication  
+- Endpoint monitoring  
+- User activity simulation  
+
+**Windows 7**
+
+Legacy vulnerable system used for security testing.
+
+**Ubuntu Server**
+
+Hosts enterprise monitoring platforms:
+
+- GLPI
+- Zabbix
+- Wazuh
+
+**Ubuntu Desktop**
+
+Linux client used for monitoring and authentication testing.
+
+**Kali Linux**
+
+Attacker machine used to simulate security threats.
+
+
+[Back to Top](#top)
