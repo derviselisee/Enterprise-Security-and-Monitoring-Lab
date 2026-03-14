@@ -4,24 +4,30 @@ Enterprise Security and Monitoring Lab with Active Directory, LDAP, FortiGate, W
 ---
 My project is designed to mirror how a real company organizes its network, security tools, and authentication systems. Each virtual machine serves a clearly defined role that allows me to practice enterprise concepts such as identity management, monitoring, threat detection, and firewall security. Because of this structured design, the environment enables me to build and validate realistic SOC and IT operational workflows within a fully controlled setting.
 
+<br>
 
 # MODULES
 
+
 | No | Name |
 |----|------|
-| Module 1 | [Lab Overview & Architecture](#module-1-lab-architecture-and-infrastructure) |
-| Module 2 | [FortiGate Network Setup ](#module-2-fortigate-network-deployment) |
+| Module 1 | [Lab Overview and Architecture](#module-1-lab-overview-and-architecture) |
+| Module 2 | [FortiGate Network Setup](#module-2-fortigate-network-setup) |
 | Module 3 | [SD WAN Configuration](#module-3-sd-wan-configuration) |
 | Module 4 | [Firewall Policy Configuration](#module-4-firewall-policy-configuration) |
-| Module 5 | [Active Directory & Domain Controller](#module-5-network-connectivity-validation) |
-| Module 6 | [LDAP Authentication & FSSO Integration](#module-6-active-directory-deployment) |
-| Module 7 | [High Availability Cluster](#module-7-domain-client-integration) |
-| Module 8 | [Ubuntu Server-GLPI,Zabbix & Wazuh](#module-8-ldap-authentication-integration) |
-| Module 9 | [Azure Hybrid Cloud Integration (Upcoming](#module-9-fortinet-fsso-deployment) |
-| Module 10 | [Threat Simulation and Detection](#module-10-fortigate-high-availability-cluster) |
-| Module 11 | [Compliance Considerations](#module-11-monitoring-platform-deployment) |
+| Module 5 | [Active Directory and Domain Controller](#module-5-active-directory-and-domain-controller) |
+| Module 6 | [LDAP Authentication and FSSO Integration](#module-6-ldap-authentication-and-fsso-integration) |
+| Module 7 | [High Availability Cluster](#module-7-high-availability-cluster) |
+| Module 8 | [Ubuntu Server with GLPI, Zabbix, and Wazuh](#module-8-ubuntu-server-with-glpi-zabbix-and-wazuh) |
+| Module 9 | [Azure Hybrid Cloud Integration (Upcoming)](#module-9-azure-hybrid-cloud-integration) |
+| Module 10 | [Threat Simulation and Detection](#module-10-threat-simulation-and-detection) |
+| Module 11 | [Compliance Considerations](#module-11-compliance-considerations) |
 
-## Module 1 - Lab Overview & Architecture
+
+---
+
+# MODULE 1 
+## LAB OVERVIEW
 
 <img width="363" height="428" alt="Lab setup" src="https://github.com/user-attachments/assets/f217f72c-b8c1-45ca-a2af-1bc3620e113f" />
 
