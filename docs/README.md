@@ -23,7 +23,7 @@ My project is designed to mirror how a real company organizes its network, secur
 
 
 
-### MODULE 1
+### LAB OVERVIEW
 <img width="363" height="428" alt="Lab setup" src="https://github.com/user-attachments/assets/f217f72c-b8c1-45ca-a2af-1bc3620e113f" />
 
 -Windows Server 2022
