@@ -828,7 +828,7 @@ This design ensures seamless connectivity, centralized security inspection, and 
 therefore completing the hybrid enterprise architecture envisioned for this project.
 
 ## COMPLIANCE CONSIDERATIONS
-This enterprise security architecture supports major cybersecurity frameworks such as ISO 27001, GDPR, and SOX by implementing strong technical controls, centralized monitoring, and structured access management. 
+This enterprise security architecture supports major cybersecurity frameworks such as ISO 27001 by implementing strong technical controls, centralized monitoring, and structured access management. 
 Through Active Directory, LDAP, and identity based firewall enforcement, the environment ensures role based access control and least privilege principles. 
 Encrypted site to site IPsec VPN connections protect data in transit, while centralized logging through Wazuh SIEM provides traceability and accountability.
 These controls align with ISO 27001 requirements for access control, cryptography, monitoring, and incident management.
